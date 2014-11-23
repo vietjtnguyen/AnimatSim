@@ -43,7 +43,10 @@ Animat.defaultSettings =
   };
 
 /**
- * Array of valid setting keys that will be [picked]{@link https://lodash.com/docs#pick} from the settings object passed to {@link Animat}'s constructor. This array is [pulled]{@link https://lodash.com/docs#keys} from {@link Animat.defaultSettings}.
+ * Array of valid setting keys that will be [picked]{@link
+ * https://lodash.com/docs#pick} from the settings object passed to {@link
+ * Animat}'s constructor. This array is [pulled]{@link
+ * https://lodash.com/docs#keys} from {@link Animat.defaultSettings}.
  * @static
  */
 Animat.validSettingKeys = _.keys(Animat.defaultSettings);
