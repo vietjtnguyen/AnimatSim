@@ -1,6 +1,7 @@
 var _ = require('./util');
 
 /**
+ * @private
  */
 function makeAnimatId() {
   makeAnimatId.globalAnimatCounter += 1;
