@@ -1,13 +1,21 @@
 var _ = require('./util');
 
 /**
+ */
+function makeAnimatId() {
+  makeAnimatId.globalAnimatCounter += 1;
+  return globalAnimatCounter;
+}
+makeAnimatId.globalAnimatCounter = -1;
+
+/**
  * @classdesc
  * Animats are essentially state containers that can accept "middleware" that
  * actually senses its environment and executes behavior.
  * @arg {Object} settings - Specifies settings to override in animat (see {@link Animat.defaultSettings}).
  * @class
  */
-function Animat(settings) {
+function Animat(settings, idFunc) {
   var self = this;
 
   /**
@@ -20,13 +28,11 @@ function Animat(settings) {
   self.id = _.result(self.idFunc);
 }
 
-var globalAnimatCounter = -1;
 
 /**
  */
 Animat.defaultSettings =
   {
-    idFunc: function() { globalAnimatCounter += 1; return globalAnimatCounter; },
     x: 0.0,
     y: 0.0,
     dir: 0.0,
