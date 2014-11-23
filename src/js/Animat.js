@@ -26,7 +26,7 @@ function Animat(settings, idFunc) {
   self.reset();
 
   // Assign an ID.
-  self.id = _.result(self.idFunc);
+  self.id = _.isFunction(idFunc) ? idFunc() : makeAnimatId();
 }
 
 
