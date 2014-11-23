@@ -3,32 +3,55 @@ var d3 = require('d3');
 var _ = require('./util');
 var colors = require('./colors');
 
-function EnvironmentVisualization(d3SvgGroup, terrain, population) {
+/**
+ */
+function Tile(row, col, x, y, size, height)
+{
+  this.row = row;
+  this.col = col;
+  this.x = x;
+  this.y = y;
+  this.size = size;
+  this.height = height; // height won't change so let's cache the value
+  this.color = d3.rgb(255, 255, 255);
+}
+
+/**
+ */
+function EnvironmentVisualization(d3SvgGroup, environment) {
+  var self = this;
+
   // Remember the SVG D3 selection.
-  this.d3SvgGroup = d3SvgGroup;
+  self.d3SvgGroup = d3SvgGroup;
+
+  // Remember associated environment.
+  self.environment = environment;
+
   // Initialize the environment display.
-  this.tileDisplayMode = settings.ED_NORMAL; // FIXME: Reference error.
+  self.tileDisplayMode = settings.ED_NORMAL; // FIXME: Reference error.
+
   // Initialize an array to contain the visualization tiles.
-  this.tiles = new Array(terrain.numOfVertices * terrain.numOfVertices);
-  this.tiles = Tile.init(this.terrain);
-  // Fill the array with tiles.
-  terrain.iterateVertices(function(value, arr, i, j)
+  self.tiles = new Array(environment.numOfVertices * environment.numOfVertices);
+  self.iterateVertices(function(value, arr, i, j)
   {
-    tiles[i * terrain.numOfVertices + j] = new Tile(
+    self.tiles[i * environment.numOfVertices + j] = new Tile(
       i, j,
-      j * terrain.segmentLength, i * terrain.segmentLength,
-      terrain.segmentLength,
+      j * environment.segmentLength, i * environment.segmentLength,
+      environment.segmentLength,
       arr[i][j]);
   });
 }
 
 EnvironmentVisualization.render = function() {
+
   // Create the D3 selection.
   var tilesSelection = this.d3SvgGroup.selectAll('.tile').data(this.tiles);
+
   // Add any missing times.
   // TODO: Pre-initialize this and just cache the resulting selection.
   tilesSelection.enter().append('rect')
     .classed('tile', true);
+
   // Update the SVG visualization. Assumes that Tile.update has been called prior.
   tilesSelection 
     .attr('x', function(d) { return d.x - d.size * 0.5; })
@@ -39,8 +62,8 @@ EnvironmentVisualization.render = function() {
   ;
 };
 
-Environment.prototype.iterateTiles = function(func)
-{
+EnvironmentVisualization.prototype.iterateTiles = function(func) {
+  var self = this;
   for( var i = 0; i < this.tiles.length; i += 1 )
   {
     func(this.tiles, i, this.tiles[i]);
@@ -76,22 +99,11 @@ module.exports = EnvironmentVisualization;
 
 // -------------------------------------------------------------------------
 // Tile
-// Tiles are used to represent the terrain, vegetation, water, etc. Their
+// Tiles are used to represent the environment, vegetation, water, etc. Their
 // actual on screen representation is simply a rectangle that is colored
 // according to what is there.
 
 // ---- constructor
-
-var Tile = function(row, col, x, y, size, height)
-{
-  this.row = row;
-  this.col = col;
-  this.x = x;
-  this.y = y;
-  this.size = size;
-  this.height = height; // height won't change so let's cache the value
-  this.color = d3.rgb(255, 255, 255);
-};
 
 // ---- methods
 
@@ -144,26 +156,6 @@ Tile.prototype.update = function(environment)
   }
 };
 
-// ---- statics
-
-// Initialize tiles which are used to display terrain height, water
-// height, vegetation, etc.
-Tile.init = function(terrain)
-{
-  var tiles = new Array(terrain.numOfVertices * terrain.numOfVertices);
-
-  terrain.iterateVertices(function(value, arr, i, j)
-  {
-    tiles[i * terrain.numOfVertices + j] = new Tile(
-      i, j,
-      j * terrain.segmentLength, i * terrain.segmentLength,
-      terrain.segmentLength,
-      arr[i][j]);
-  });
-
-  return tiles;
-};
-
-module.exports = Tile;
+module.exports = EnvironmentVisualization;
 
 
