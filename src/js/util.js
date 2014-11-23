@@ -26,6 +26,7 @@ _.clamp = function(x, a, b) {
 /**
  * Operates similar to [LoDash's result function]{@link https://lodash.com/docs#result} except on all object keys. Adopted from [the result function source]{@link https://github.com/lodash/lodash/blob/master/lodash.js#L9820}.
  * @name resultObject
+ * @function
  * @arg object {Object}
  * @arg defaultValue [{}] The value to set a key that is undefined. By default this is just undefined.
  * @return {Object}
