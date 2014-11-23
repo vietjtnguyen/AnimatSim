@@ -5,8 +5,7 @@ var colors = require('./colors');
 
 /**
  */
-function Tile(row, col, x, y, size, height)
-{
+function Tile(row, col, x, y, size, height) {
   this.row = row;
   this.col = col;
   this.x = x;
@@ -18,97 +17,9 @@ function Tile(row, col, x, y, size, height)
 
 /**
  */
-function EnvironmentVisualization(d3SvgGroup, environment) {
+Tile.prototype.update = function(environment) {
   var self = this;
 
-  // Remember the SVG D3 selection.
-  self.d3SvgGroup = d3SvgGroup;
-
-  // Remember associated environment.
-  self.environment = environment;
-
-  // Initialize the environment display.
-  self.tileDisplayMode = settings.ED_NORMAL; // FIXME: Reference error.
-
-  // Initialize an array to contain the visualization tiles.
-  self.tiles = new Array(environment.numOfVertices * environment.numOfVertices);
-  self.iterateVertices(function(value, arr, i, j)
-  {
-    self.tiles[i * environment.numOfVertices + j] = new Tile(
-      i, j,
-      j * environment.segmentLength, i * environment.segmentLength,
-      environment.segmentLength,
-      arr[i][j]);
-  });
-}
-
-EnvironmentVisualization.render = function() {
-
-  // Create the D3 selection.
-  var tilesSelection = this.d3SvgGroup.selectAll('.tile').data(this.tiles);
-
-  // Add any missing times.
-  // TODO: Pre-initialize this and just cache the resulting selection.
-  tilesSelection.enter().append('rect')
-    .classed('tile', true);
-
-  // Update the SVG visualization. Assumes that Tile.update has been called prior.
-  tilesSelection 
-    .attr('x', function(d) { return d.x - d.size * 0.5; })
-    .attr('y', function(d) { return d.y - d.size * 0.5; })
-    .attr('width', function(d) { return d.size; })
-    .attr('height', function(d) { return d.size; })
-    .style('fill', function(d) { return d.color.toString(); })
-  ;
-};
-
-EnvironmentVisualization.prototype.iterateTiles = function(func) {
-  var self = this;
-  for( var i = 0; i < this.tiles.length; i += 1 )
-  {
-    func(this.tiles, i, this.tiles[i]);
-  }
-};
-
-Environment.prototype.updateTiles = function()
-{
-  var env = this;
-  this.iterateTiles(function(tiles, i, tile) { tile.update(env); });
-};
-
-Environment.prototype.render = function(tilesRoot)
-{
-  Tile.updateRepresentations(tilesRoot, this.tiles);
-};
-
-EnvironmentVisualization.ED_NORMAL = 0;
-EnvironmentVisualization.ED_TEMPERATURE_ONLY = 1;
-EnvironmentVisualization.ED_MOISTURE_ONLY = 2;
-EnvironmentVisualization.ED_VEGETATION_ONLY = 3;
-EnvironmentVisualization.ED_ANIMAT_DENSITY_ONLY = 4;
-EnvironmentVisualization.numOfEnvironmentDisplayModes = 5;
-
-module.exports = EnvironmentVisualization;
-
-
-
-
-
-
-
-
-// -------------------------------------------------------------------------
-// Tile
-// Tiles are used to represent the environment, vegetation, water, etc. Their
-// actual on screen representation is simply a rectangle that is colored
-// according to what is there.
-
-// ---- constructor
-
-// ---- methods
-
-Tile.prototype.update = function(environment)
-{
   var vegetationColor;
   switch( settings.tileDisplayMode )
   {
@@ -156,6 +67,66 @@ Tile.prototype.update = function(environment)
   }
 };
 
+/**
+ */
+function EnvironmentVisualization(d3SvgGroup, environment) {
+  var self = this;
+
+  // Remember the SVG D3 selection.
+  self.d3SvgGroup = d3SvgGroup;
+
+  // Remember associated environment.
+  self.environment = environment;
+
+  // Initialize the environment display.
+  self.tileDisplayMode = settings.ED_NORMAL; // FIXME: Reference error.
+
+  // Initialize an array to contain the visualization tiles.
+  self.tiles = new Array(environment.numOfVertices * environment.numOfVertices);
+  self.iterateVertices(function(value, arr, i, j)
+  {
+    self.tiles[i * environment.numOfVertices + j] = new Tile(
+      i, j,
+      j * environment.segmentLength, i * environment.segmentLength,
+      environment.segmentLength,
+      arr[i][j]);
+  });
+}
+
+EnvironmentVisualization.render = function() {
+  var self = this;
+
+  // Create the D3 selection.
+  var tilesSelection = this.d3SvgGroup.selectAll('.tile').data(this.tiles);
+
+  // Add any missing times.
+  // TODO: Pre-initialize this and just cache the resulting selection.
+  tilesSelection.enter().append('rect')
+    .classed('tile', true);
+
+  // Update the SVG visualization. Assumes that Tile.update has been called prior.
+  tilesSelection 
+    .attr('x', function(d) { return d.x - d.size * 0.5; })
+    .attr('y', function(d) { return d.y - d.size * 0.5; })
+    .attr('width', function(d) { return d.size; })
+    .attr('height', function(d) { return d.size; })
+    .style('fill', function(d) { return d.color.toString(); })
+  ;
+};
+
+EnvironmentVisualization.prototype.iterateTiles = function(func) {
+  var self = this;
+  for( var i = 0; i < this.tiles.length; i += 1 )
+  {
+    func(this.tiles, i, this.tiles[i]);
+  }
+};
+
+EnvironmentVisualization.ED_NORMAL = 0;
+EnvironmentVisualization.ED_TEMPERATURE_ONLY = 1;
+EnvironmentVisualization.ED_MOISTURE_ONLY = 2;
+EnvironmentVisualization.ED_VEGETATION_ONLY = 3;
+EnvironmentVisualization.ED_ANIMAT_DENSITY_ONLY = 4;
+EnvironmentVisualization.numOfEnvironmentDisplayModes = 5;
+
 module.exports = EnvironmentVisualization;
-
-
