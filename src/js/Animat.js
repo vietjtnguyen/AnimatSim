@@ -12,10 +12,16 @@ function Animat(settings) {
 
   // Apply default settings and specified settings.
 	_.assign(self, Animat.defaultSettings, _.pick(settings, Animat.validSettingKeys));
+
+  // Assign an ID.
+  self.id = self.idFunc();
 }
+
+var globalAnimatCounter = -1;
 
 Animat.defaultSettings =
   {
+    idFunc: function() { globalAnimatCounter += 1; return globalAnimatCounter; },
     x: 0.0,
     y: 0.0,
     dir: 0.0,
@@ -27,6 +33,8 @@ Animat.defaultSettings =
  * @static
  */
 Animat.validSettingKeys = _.keys(Animat.defaultSettings);
+
+
 var _ = require('./util');
 
 // Constructs an Animat object with the provided index (just for
