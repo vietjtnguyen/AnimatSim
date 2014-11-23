@@ -3,6 +3,77 @@ var d3 = require('d3');
 var _ = require('./util');
 var colors = require('./colors');
 
+function EnvironmentVisualization(d3SvgGroup, terrain, population) {
+  // Remember the SVG D3 selection.
+  this.d3SvgGroup = d3SvgGroup;
+  // Initialize the environment display.
+  this.tileDisplayMode = settings.ED_NORMAL; // FIXME: Reference error.
+  // Initialize an array to contain the visualization tiles.
+  this.tiles = new Array(terrain.numOfVertices * terrain.numOfVertices);
+  this.tiles = Tile.init(this.terrain);
+  // Fill the array with tiles.
+  terrain.iterateVertices(function(value, arr, i, j)
+  {
+    tiles[i * terrain.numOfVertices + j] = new Tile(
+      i, j,
+      j * terrain.segmentLength, i * terrain.segmentLength,
+      terrain.segmentLength,
+      arr[i][j]);
+  });
+}
+
+EnvironmentVisualization.render = function() {
+  // Create the D3 selection.
+  var tilesSelection = this.d3SvgGroup.selectAll('.tile').data(this.tiles);
+  // Add any missing times.
+  // TODO: Pre-initialize this and just cache the resulting selection.
+  tilesSelection.enter().append('rect')
+    .classed('tile', true);
+  // Update the SVG visualization. Assumes that Tile.update has been called prior.
+  tilesSelection 
+    .attr('x', function(d) { return d.x - d.size * 0.5; })
+    .attr('y', function(d) { return d.y - d.size * 0.5; })
+    .attr('width', function(d) { return d.size; })
+    .attr('height', function(d) { return d.size; })
+    .style('fill', function(d) { return d.color.toString(); })
+  ;
+};
+
+Environment.prototype.iterateTiles = function(func)
+{
+  for( var i = 0; i < this.tiles.length; i += 1 )
+  {
+    func(this.tiles, i, this.tiles[i]);
+  }
+};
+
+Environment.prototype.updateTiles = function()
+{
+  var env = this;
+  this.iterateTiles(function(tiles, i, tile) { tile.update(env); });
+};
+
+Environment.prototype.render = function(tilesRoot)
+{
+  Tile.updateRepresentations(tilesRoot, this.tiles);
+};
+
+EnvironmentVisualization.ED_NORMAL = 0;
+EnvironmentVisualization.ED_TEMPERATURE_ONLY = 1;
+EnvironmentVisualization.ED_MOISTURE_ONLY = 2;
+EnvironmentVisualization.ED_VEGETATION_ONLY = 3;
+EnvironmentVisualization.ED_ANIMAT_DENSITY_ONLY = 4;
+EnvironmentVisualization.numOfEnvironmentDisplayModes = 5;
+
+module.exports = EnvironmentVisualization;
+
+
+
+
+
+
+
+
 // -------------------------------------------------------------------------
 // Tile
 // Tiles are used to represent the terrain, vegetation, water, etc. Their
@@ -94,86 +165,5 @@ Tile.init = function(terrain)
 };
 
 module.exports = Tile;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// TODO: Merge Tile with this. Tile can just be a vanilla object, it doesn't
-// have to be a class. Whatever behavior is in there can be given to the
-// visualization.
-
-function EnvironmentVisualization(d3SvgGroup, terrain, population) {
-  // Remember the SVG D3 selection.
-  this.d3SvgGroup = d3SvgGroup;
-  // Initialize the environment display.
-  this.tileDisplayMode = settings.ED_NORMAL; // FIXME: Reference error.
-  // Initialize an array to contain the visualization tiles.
-  this.tiles = new Array(terrain.numOfVertices * terrain.numOfVertices);
-  this.tiles = Tile.init(this.terrain);
-  // Fill the array with tiles.
-  terrain.iterateVertices(function(value, arr, i, j)
-  {
-    tiles[i * terrain.numOfVertices + j] = new Tile(
-      i, j,
-      j * terrain.segmentLength, i * terrain.segmentLength,
-      terrain.segmentLength,
-      arr[i][j]);
-  });
-}
-
-EnvironmentVisualization.render = function() {
-  // Create the D3 selection.
-  var tilesSelection = this.d3SvgGroup.selectAll('.tile').data(this.tiles);
-  // Add any missing times.
-  // TODO: Pre-initialize this and just cache the resulting selection.
-  tilesSelection.enter().append('rect')
-    .classed('tile', true);
-  // Update the SVG visualization. Assumes that Tile.update has been called prior.
-  tilesSelection 
-    .attr('x', function(d) { return d.x - d.size * 0.5; })
-    .attr('y', function(d) { return d.y - d.size * 0.5; })
-    .attr('width', function(d) { return d.size; })
-    .attr('height', function(d) { return d.size; })
-    .style('fill', function(d) { return d.color.toString(); })
-  ;
-};
-
-Environment.prototype.iterateTiles = function(func)
-{
-  for( var i = 0; i < this.tiles.length; i += 1 )
-  {
-    func(this.tiles, i, this.tiles[i]);
-  }
-};
-
-Environment.prototype.updateTiles = function()
-{
-  var env = this;
-  this.iterateTiles(function(tiles, i, tile) { tile.update(env); });
-};
-
-Environment.prototype.render = function(tilesRoot)
-{
-  Tile.updateRepresentations(tilesRoot, this.tiles);
-};
-
-EnvironmentVisualization.ED_NORMAL = 0;
-EnvironmentVisualization.ED_TEMPERATURE_ONLY = 1;
-EnvironmentVisualization.ED_MOISTURE_ONLY = 2;
-EnvironmentVisualization.ED_VEGETATION_ONLY = 3;
-EnvironmentVisualization.ED_ANIMAT_DENSITY_ONLY = 4;
-EnvironmentVisualization.numOfEnvironmentDisplayModes = 5;
-
-module.exports = EnvironmentVisualization;
 
 
