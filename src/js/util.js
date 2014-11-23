@@ -23,5 +23,16 @@ _.clamp = function(x, a, b) {
 	return Math.min(Math.max(x, a), b);
 };
 
+/**
+ */
+_.resultObject = function(object, defaultValue) {
+  return _.mapValues(object, function(value, key, object) {
+    if (typeof value == 'undefined') {
+      return defaultValue;
+    }
+    return isFunction(value) ? object[key]() : value;
+  });
+};
+
 module.exports = _;
 
