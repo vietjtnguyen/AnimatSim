@@ -14,7 +14,7 @@ makeAnimatId.globalAnimatCounter = -1;
  * Animats are essentially state containers that can accept "middleware" that
  * actually senses its environment and executes behavior.
  * @arg {Object} environment
- * @arg {Object} settings - Specifies settings to override in animat (see {@link Animat.defaultSettings}).
+ * @arg {Object} settings Specifies settings to override in animat (see {@link Animat.defaultSettings}).
  * @arg [{function}] idFunc
  * @class
  */
