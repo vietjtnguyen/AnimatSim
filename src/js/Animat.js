@@ -13,10 +13,12 @@ makeAnimatId.globalAnimatCounter = -1;
  * @classdesc
  * Animats are essentially state containers that can accept "middleware" that
  * actually senses its environment and executes behavior.
+ * @arg {Object} environment
  * @arg {Object} settings - Specifies settings to override in animat (see {@link Animat.defaultSettings}).
+ * @arg [{function}] idFunc
  * @class
  */
-function Animat(settings, idFunc) {
+function Animat(environment, settings, idFunc) {
   var self = this;
 
   /**
@@ -56,21 +58,6 @@ Animat.prototype.reset = function() {
 };
 
 
-var _ = require('./util');
-
-// Constructs an Animat object with the provided index (just for
-// identification) and brain construction callback.
-var Animat = function(index, brain)
-{
-  var self = this;
-  self.index = index;
-  self.reset();
-  self.brain = _.result(brain);
-};
-
-// Set up prototype chain.
-Animat.prototype = new BaseAnimat();
-Animat.base = BaseAnimat;
 
 Animat.prototype.reset = function()
 {
