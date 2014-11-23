@@ -82,9 +82,9 @@ function EnvironmentVisualization(d3SvgGroup, environment) {
   self.tileDisplayMode = settings.ED_NORMAL; // FIXME: Reference error.
 
   // Initialize an array to contain the visualization tiles.
-  self.tiles = new Array(environment.numOfVertices * environment.numOfVertices);
+  self.tiles = new Array(self.environment.rows * self.environment.cols);
   self.iterateVertices(function(value, arr, i, j) {
-    self.tiles[i * environment.numOfVertices + j] = new Tile(
+    self.tiles[i * self.environment.cols + j] = new Tile(
       i, j,
       j * environment.segmentLength, i * environment.segmentLength,
       environment.segmentLength,
