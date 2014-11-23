@@ -32,7 +32,7 @@ _.resultObject = function(object, defaultValue) {
     if (typeof value == 'undefined') {
       return defaultValue;
     }
-    return isFunction(value) ? object[key]() : value;
+    return _.isFunction(value) ? object[key]() : value;
   });
 };
 
