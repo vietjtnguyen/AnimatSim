@@ -25,7 +25,9 @@ _.clamp = function(x, a, b) {
 
 /**
  * Operates similar to [LoDash's result function]{@link
- * https://lodash.com/docs#result} except on all object keys.
+ * https://lodash.com/docs#result} except on all object keys. Adopted from [the
+ * result function source]{@link
+ * https://github.com/lodash/lodash/blob/master/lodash.js#L9820}.
  */
 _.resultObject = function(object, defaultValue) {
   return _.mapValues(object, function(value, key, object) {
