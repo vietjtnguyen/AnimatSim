@@ -83,8 +83,7 @@ function EnvironmentVisualization(d3SvgGroup, environment) {
 
   // Initialize an array to contain the visualization tiles.
   self.tiles = new Array(environment.numOfVertices * environment.numOfVertices);
-  self.iterateVertices(function(value, arr, i, j)
-  {
+  self.iterateVertices(function(value, arr, i, j) {
     self.tiles[i * environment.numOfVertices + j] = new Tile(
       i, j,
       j * environment.segmentLength, i * environment.segmentLength,
