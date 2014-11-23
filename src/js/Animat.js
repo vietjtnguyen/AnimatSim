@@ -10,8 +10,11 @@ var _ = require('./util');
 function Animat(settings) {
   var self = this;
 
-  // Apply default settings and specified settings.
-	_.assign(self, Animat.defaultSettings, _.pick(settings, Animat.validSettingKeys));
+  /**
+   */
+  self.settings = settings;
+
+  self.reset();
 
   // Assign an ID.
   self.id = _.result(self.idFunc);
@@ -19,6 +22,8 @@ function Animat(settings) {
 
 var globalAnimatCounter = -1;
 
+/**
+ */
 Animat.defaultSettings =
   {
     idFunc: function() { globalAnimatCounter += 1; return globalAnimatCounter; },
@@ -33,6 +38,15 @@ Animat.defaultSettings =
  * @static
  */
 Animat.validSettingKeys = _.keys(Animat.defaultSettings);
+
+/**
+ */
+Animat.prototype.reset = function() {
+  var self = this;
+
+  // Apply default settings and specified settings.
+	_.assign(self, Animat.defaultSettings, _.objectResult(_.pick(settings, Animat.validSettingKeys)));
+};
 
 
 var _ = require('./util');
