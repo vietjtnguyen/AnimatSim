@@ -115,8 +115,7 @@ EnvironmentVisualization.render = function() {
 
 EnvironmentVisualization.prototype.iterateTiles = function(func) {
   var self = this;
-  for( var i = 0; i < this.tiles.length; i += 1 )
-  {
+  for( var i = 0; i < this.tiles.length; i += 1 ) {
     func(this.tiles, i, this.tiles[i]);
   }
 };
