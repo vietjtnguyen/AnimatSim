@@ -14,7 +14,7 @@ function Animat(settings) {
 	_.assign(self, Animat.defaultSettings, _.pick(settings, Animat.validSettingKeys));
 
   // Assign an ID.
-  self.id = self.idFunc();
+  self.id = _.result(self.idFunc);
 }
 
 var globalAnimatCounter = -1;
