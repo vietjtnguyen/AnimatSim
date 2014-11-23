@@ -24,6 +24,8 @@ _.clamp = function(x, a, b) {
 };
 
 /**
+ * Operates similar to [LoDash's result function]{@link
+ * https://lodash.com/docs#result} except on all object keys.
  */
 _.resultObject = function(object, defaultValue) {
   return _.mapValues(object, function(value, key, object) {
