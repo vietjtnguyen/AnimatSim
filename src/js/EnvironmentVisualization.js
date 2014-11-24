@@ -48,7 +48,7 @@ Tile.prototype.update = function(environment)
   case settings.ED_NORMAL:
     if( this.height < environment.waterLevel )
     {
-      this.color = waterColor;
+      this.color = colors.waterColor;
     }
     else
     {
@@ -56,7 +56,7 @@ Tile.prototype.update = function(environment)
       var terrainColor = d3.rgb(colors.terrainColorScale(this.height));
       vegetationColor = d3.rgb(colors.vegetationColorScale(this.height));
       var vegetationValue = environment.vegetation.values[this.row][this.col];
-      this.color = util.lerpColor(waterColor, util.lerpColor(terrainColor, vegetationColor, vegetationValue), t);
+      this.color = util.lerpColor(colors.waterColor, util.lerpColor(terrainColor, vegetationColor, vegetationValue), t);
     }
     break;
 
