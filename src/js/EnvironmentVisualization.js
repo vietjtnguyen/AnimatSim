@@ -19,7 +19,7 @@ function TileVegetationBrush()
 {
 }
 
-function TIleAnimatDensityBrush()
+function TileAnimatDensityBrush()
 {
 }
 
@@ -53,8 +53,8 @@ Tile.prototype.update = function(environment)
     else
     {
       var t = util.clamp((this.height - environment.waterLevel) / 0.025, 0.0, 1.0);
-      var terrainColor = d3.rgb(terrainColorScale(this.height));
-      vegetationColor = d3.rgb(vegetationColorScale(this.height));
+      var terrainColor = d3.rgb(colors.terrainColorScale(this.height));
+      vegetationColor = d3.rgb(colors.vegetationColorScale(this.height));
       var vegetationValue = environment.vegetation.values[this.row][this.col];
       this.color = util.lerpColor(waterColor, util.lerpColor(terrainColor, vegetationColor, vegetationValue), t);
     }
@@ -62,25 +62,25 @@ Tile.prototype.update = function(environment)
 
   case settings.ED_TEMPERATURE_ONLY:
     var temperature = environment.temperature.values[this.row][this.col];
-    var temperatureColor = d3.rgb(temperatureColorScale(temperature));
+    var temperatureColor = d3.rgb(colors.temperatureColorScale(temperature));
     this.color = temperatureColor;
     break;
 
   case settings.ED_MOISTURE_ONLY:
     var moisture = environment.moisture.values[this.row][this.col];
-    var moistureColor = d3.rgb(moistureColorScale(moisture));
+    var moistureColor = d3.rgb(colors.moistureColorScale(moisture));
     this.color = moistureColor;
     break;
 
   case settings.ED_VEGETATION_ONLY:
     var vegetation = environment.vegetation.values[this.row][this.col];
-    vegetationColor = d3.rgb(vegetationColorScale(this.height));
+    vegetationColor = d3.rgb(colors.vegetationColorScale(this.height));
     this.color = util.lerpColor(d3.rgb(0, 0, 0), vegetationColor, vegetation);
     break;
 
   case settings.ED_ANIMAT_DENSITY_ONLY:
     var animatDensity = environment.animatDensity.values[this.row][this.col] / (app.populationSize * 0.05);
-    var animatDensityColor = d3.rgb(animatDensityColorScale(animatDensity));
+    var animatDensityColor = d3.rgb(colors.animatDensityColorScale(animatDensity));
     this.color = util.lerpColor(d3.rgb(0, 0, 0), animatDensityColor, Math.sqrt(animatDensity));
     break;
 
