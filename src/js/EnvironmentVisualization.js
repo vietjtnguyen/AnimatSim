@@ -3,27 +3,52 @@ var d3 = require('d3');
 var _ = require('./util');
 var colors = require('./colors');
 
-function TileTerrainBrush()
+function TileTerrainBrush(tile, environment)
 {
+  if( tile.height < environment.waterLevel )
+  {
+    tile.color = colors.waterColor;
+  }
+  else
+  {
+    var t = util.clamp((tile.height - environment.waterLevel) / 0.025, 0.0, 1.0);
+    var terrainColor = d3.rgb(colors.terrainColorScale(tile.height));
+    var vegetationColor = d3.rgb(colors.vegetationColorScale(tile.height));
+    var vegetationValue = environment.vegetation.values[tile.row][tile.col];
+    tile.color = util.lerpColor(colors.waterColor, util.lerpColor(terrainColor, vegetationColor, vegetationValue), t);
+  }
 }
 
-function TileTemperatureBrush()
+function TileTemperatureBrush(tile, environment)
 {
+  var temperature = environment.temperature.values[tile.row][tile.col];
+  var temperatureColor = d3.rgb(colors.temperatureColorScale(temperature));
+  tile.color = temperatureColor;
 }
 
-function TileMoistureBrush()
+function TileMoistureBrush(tile, environment)
 {
+  var moisture = environment.moisture.values[tile.row][tile.col];
+  var moistureColor = d3.rgb(colors.moistureColorScale(moisture));
+  tile.color = moistureColor;
 }
 
-function TileVegetationBrush()
+function TileVegetationBrush(tile, environment)
 {
+  var vegetation = environment.vegetation.values[tile.row][tile.col];
+  var vegetationColor = d3.rgb(colors.vegetationColorScale(tile.height));
+  tile.color = util.lerpColor(d3.rgb(0, 0, 0), vegetationColor, vegetation);
 }
 
-function TileAnimatDensityBrush()
+function TileAnimatDensityBrush(tile, environment)
 {
+  var animatDensity = environment.animatDensity.values[tile.row][tile.col] / (app.populationSize * 0.05);
+  var animatDensityColor = d3.rgb(colors.animatDensityColorScale(animatDensity));
+  tile.color = util.lerpColor(d3.rgb(0, 0, 0), animatDensityColor, Math.sqrt(animatDensity));
 }
 
 /**
+ * @class
  */
 function Tile(row, col, x, y, size, height)
 {
@@ -35,59 +60,6 @@ function Tile(row, col, x, y, size, height)
   this.height = height; // height won't change so let's cache the value
   this.color = d3.rgb(255, 255, 255);
 }
-
-/**
- */
-Tile.prototype.update = function(environment)
-{
-  var self = this;
-
-  var vegetationColor;
-  switch( settings.tileDisplayMode )
-  {
-  case settings.ED_NORMAL:
-    if( this.height < environment.waterLevel )
-    {
-      this.color = colors.waterColor;
-    }
-    else
-    {
-      var t = util.clamp((this.height - environment.waterLevel) / 0.025, 0.0, 1.0);
-      var terrainColor = d3.rgb(colors.terrainColorScale(this.height));
-      vegetationColor = d3.rgb(colors.vegetationColorScale(this.height));
-      var vegetationValue = environment.vegetation.values[this.row][this.col];
-      this.color = util.lerpColor(colors.waterColor, util.lerpColor(terrainColor, vegetationColor, vegetationValue), t);
-    }
-    break;
-
-  case settings.ED_TEMPERATURE_ONLY:
-    var temperature = environment.temperature.values[this.row][this.col];
-    var temperatureColor = d3.rgb(colors.temperatureColorScale(temperature));
-    this.color = temperatureColor;
-    break;
-
-  case settings.ED_MOISTURE_ONLY:
-    var moisture = environment.moisture.values[this.row][this.col];
-    var moistureColor = d3.rgb(colors.moistureColorScale(moisture));
-    this.color = moistureColor;
-    break;
-
-  case settings.ED_VEGETATION_ONLY:
-    var vegetation = environment.vegetation.values[this.row][this.col];
-    vegetationColor = d3.rgb(colors.vegetationColorScale(this.height));
-    this.color = util.lerpColor(d3.rgb(0, 0, 0), vegetationColor, vegetation);
-    break;
-
-  case settings.ED_ANIMAT_DENSITY_ONLY:
-    var animatDensity = environment.animatDensity.values[this.row][this.col] / (app.populationSize * 0.05);
-    var animatDensityColor = d3.rgb(colors.animatDensityColorScale(animatDensity));
-    this.color = util.lerpColor(d3.rgb(0, 0, 0), animatDensityColor, Math.sqrt(animatDensity));
-    break;
-
-  default:
-    break;
-  }
-};
 
 /**
  * @class
