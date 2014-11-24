@@ -102,9 +102,12 @@ EnvironmentVisualization.ED_VEGETATION_ONLY = 3;
 EnvironmentVisualization.ED_ANIMAT_DENSITY_ONLY = 4;
 EnvironmentVisualization.numOfEnvironmentDisplayModes = 5;
 
-EnvironmentVisualization.render = function()
-{
+EnvironmentVisualization.render = function(brush) {
   var self = this;
+
+  _.forEach(self.tiles, function(tile) {
+    tile.paintWith(brush);
+  });
 
   // Create the D3 selection.
   var tilesSelection = this.d3SvgGroup.selectAll('.tile').data(this.tiles);
