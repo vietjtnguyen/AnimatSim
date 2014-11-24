@@ -61,6 +61,12 @@ function Tile(row, col, x, y, size, height)
   this.color = d3.rgb(255, 255, 255);
 }
 
+Tile.prototype.brushWith = function(brush, environment)
+{
+  var this = self;
+  brush(self, environment);
+}
+
 /**
  * @class
  */
