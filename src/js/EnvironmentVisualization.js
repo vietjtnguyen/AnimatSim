@@ -3,9 +3,30 @@ var d3 = require('d3');
 var _ = require('./util');
 var colors = require('./colors');
 
+function TileTerrainBrush()
+{
+}
+
+function TileTemperatureBrush()
+{
+}
+
+function TileMoistureBrush()
+{
+}
+
+function TileVegetationBrush()
+{
+}
+
+function TIleAnimatDensityBrush()
+{
+}
+
 /**
  */
-function Tile(row, col, x, y, size, height) {
+function Tile(row, col, x, y, size, height)
+{
   this.row = row;
   this.col = col;
   this.x = x;
@@ -17,7 +38,8 @@ function Tile(row, col, x, y, size, height) {
 
 /**
  */
-Tile.prototype.update = function(environment) {
+Tile.prototype.update = function(environment)
+{
   var self = this;
 
   var vegetationColor;
@@ -68,8 +90,10 @@ Tile.prototype.update = function(environment) {
 };
 
 /**
+ * @class
  */
-function EnvironmentVisualization(d3SvgGroup, environment) {
+function EnvironmentVisualization(d3SvgGroup, environment)
+{
   var self = this;
 
   // Remember the SVG D3 selection.
@@ -83,7 +107,8 @@ function EnvironmentVisualization(d3SvgGroup, environment) {
 
   // Initialize an array to contain the visualization tiles.
   self.tiles = new Array(self.environment.rows * self.environment.cols);
-  self.iterateVertices(function(value, arr, i, j) {
+  self.iterateVertices(function(value, arr, i, j)
+  {
     self.tiles[i * self.environment.cols + j] = new Tile(
       i, j,
       j * environment.segmentLength, i * environment.segmentLength,
@@ -92,7 +117,15 @@ function EnvironmentVisualization(d3SvgGroup, environment) {
   });
 }
 
-EnvironmentVisualization.render = function() {
+EnvironmentVisualization.ED_NORMAL = 0;
+EnvironmentVisualization.ED_TEMPERATURE_ONLY = 1;
+EnvironmentVisualization.ED_MOISTURE_ONLY = 2;
+EnvironmentVisualization.ED_VEGETATION_ONLY = 3;
+EnvironmentVisualization.ED_ANIMAT_DENSITY_ONLY = 4;
+EnvironmentVisualization.numOfEnvironmentDisplayModes = 5;
+
+EnvironmentVisualization.render = function()
+{
   var self = this;
 
   // Create the D3 selection.
@@ -113,18 +146,13 @@ EnvironmentVisualization.render = function() {
   ;
 };
 
-EnvironmentVisualization.prototype.iterateTiles = function(func) {
+EnvironmentVisualization.prototype.iterateTiles = function(func)
+{
   var self = this;
-  for( var i = 0; i < this.tiles.length; i += 1 ) {
+  for ( var i = 0; i < this.tiles.length; i += 1 )
+  {
     func(this.tiles, i, this.tiles[i]);
   }
 };
-
-EnvironmentVisualization.ED_NORMAL = 0;
-EnvironmentVisualization.ED_TEMPERATURE_ONLY = 1;
-EnvironmentVisualization.ED_MOISTURE_ONLY = 2;
-EnvironmentVisualization.ED_VEGETATION_ONLY = 3;
-EnvironmentVisualization.ED_ANIMAT_DENSITY_ONLY = 4;
-EnvironmentVisualization.numOfEnvironmentDisplayModes = 5;
 
 module.exports = EnvironmentVisualization;
