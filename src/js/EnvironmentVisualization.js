@@ -63,9 +63,9 @@ function Tile(row, col, x, y, size, height)
 
 Tile.prototype.brushWith = function(brush, environment)
 {
-  var this = self;
+  var self = this;
   brush(self, environment);
-}
+};
 
 /**
  * @class
