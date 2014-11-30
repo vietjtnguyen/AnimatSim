@@ -51,7 +51,7 @@ describe('The Environment module', function() {
       expect(environment.vegetation).to.exist();
       expect(environment.animatDensity).to.exist();
     });
-    it('should, with default settings, gain more vegetation during isolated simulation', function() {
+    it('should, with default settings, gain more vegetation during isolated (no animats) simulation', function() {
       var environment = new Environment();
       environment.terrain.iterateVertices(function(value, arr, x, y) {
         arr[x][y] = y;
