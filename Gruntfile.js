@@ -78,11 +78,8 @@ module.exports = function(grunt) {
     }
   });
 
-  grunt.registerTask('build', ['browserify', 'uglify']);//, 'concat', 'uglify']);
+  grunt.registerTask('build', ['browserify', 'uglify', 'copy']);
   grunt.registerTask('docs', ['jsdoc']);
   grunt.registerTask('test', ['jshint', 'mochaTest']);
-
   grunt.registerTask('default', ['jsdoc', 'jshint', 'mochaTest', 'browserify', 'uglify', 'copy']);
-  // TODO: Add a documentation task.
-
 };
