@@ -38,6 +38,11 @@ describe('The util module', function() {
     it('should return min+1 of the interval for a value at max of the interval', function() {
       expect(_.incLoop(5, 2, 5)).to.equal(3);
     });
+    it('should work with negative numbers', function() {
+      expect(_.incLoop(-3, -5, -1)).to.equal(-2);
+      expect(_.incLoop(-2, -5, -1)).to.equal(-5);
+      expect(_.incLoop(-1, -5, -1)).to.equal(-4);
+    });
   });
 
   describe('The resultObject function', function() {
