@@ -1,5 +1,5 @@
 {
-  "name": "animatsim",
+  "name": "AnimatSim",
   "version": "0.0.1",
   "description": "",
   "keywords": ["animats", "evolution", "neural network", "artificial life", "simulation"],
@@ -14,10 +14,12 @@
     "type": "git",
     "url": ""
   },
-  "main": "./src/js/animatsim.js",
+  "main": "./src/js/AnimatSimt.js",
   "scripts": {
-    "doc": "",
+    "build": "grunt build",
+    "doc": "grunt doc",
     "test": "grunt test"
+    "make": "grunt default"
   },
   "private": true,
   "dependencies": {
