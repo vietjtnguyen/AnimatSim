@@ -45,6 +45,27 @@ describe('The util module', function() {
     });
   });
 
+  describe('The decLoop function', function() {
+    it('should return the max-1 of the interval for a value at min of the interval', function() {
+      expect(_.decLoop(2, 2, 5)).to.equal(4);
+    });
+    it('should return the max-2 of the interval for a value at max-1 of the interval', function() {
+      expect(_.decLoop(4, 2, 5)).to.equal(3);
+    });
+    it('should return max-2 of the interval for a value at min-1 of the interval', function() {
+      expect(_.decLoop(1, 2, 5)).to.equal(3);
+    });
+    it('should work with negative numbers', function() {
+      expect(_.decLoop( 0, -5, -1)).to.equal(-5);
+      expect(_.decLoop(-1, -5, -1)).to.equal(-2);
+      expect(_.decLoop(-2, -5, -1)).to.equal(-3);
+      expect(_.decLoop(-3, -5, -1)).to.equal(-4);
+      expect(_.decLoop(-4, -5, -1)).to.equal(-5);
+      expect(_.decLoop(-5, -5, -1)).to.equal(-2);
+      expect(_.decLoop(-6, -5, -1)).to.equal(-3);
+    });
+  });
+
   describe('The resultObject function', function() {
     it('should return a simple (no functions) object unmodified', function() {
       var a = {a: 1, b: 'foo', c: 3.14, d: {e: 2, f: 'bar', g: '1.67'}};
