@@ -27,5 +27,6 @@ describe('The EnvironmentVisualization module', function() {
     it('should position the tiles into a grid pattern matching the environment terrain mesh grid');
     it('should, when rendered, change the color of a tile to the color resulting from the application of a tile brush');
     it('should use the terrain brush by default');
+    it('should show all tiles submerged when sea level is raised above all terrain');
   });
 });
