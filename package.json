@@ -1,7 +1,7 @@
 {
   "name": "AnimatSim",
   "version": "0.0.1",
-  "description": "",
+  "description": "A fun and simple simulation and visualization project for playing with animats (artificial life agents).",
   "keywords": ["animats", "evolution", "neural network", "artificial life", "simulation"],
   "homepage": "",
   "bugs": "",
