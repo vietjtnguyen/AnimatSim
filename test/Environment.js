@@ -51,6 +51,25 @@ describe('The Environment module', function() {
       expect(environment.vegetation).to.exist();
       expect(environment.animatDensity).to.exist();
     });
-    it('should, with default settings, gain more vegetation during isolated simulation');
+    it('should, with default settings, gain more vegetation during isolated simulation', function() {
+      var environment = new Environment();
+      environment.terrain.iterateVertices(function(value, arr, x, y) {
+        arr[x][y] = y;
+      });
+      environment.terrain.normalizeValues();
+      var preVegetationSum = 0.0;
+      environment.vegetation.iterateVertices(function(value, arr, x, y) {
+        preVegetationSum += value;
+      });
+      for ( var i = 0; i < 100; i += 1 )
+      {
+        environment.step();
+      }
+      var postVegetationSum = 0.0;
+      environment.vegetation.iterateVertices(function(value, arr, x, y) {
+        postVegetationSum += value;
+      });
+      expect(postVegetationSum).to.be.greaterThan(preVegetationSum);
+    });
   });
 });
