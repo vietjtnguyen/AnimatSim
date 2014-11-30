@@ -23,7 +23,7 @@ function Tile(row, col, x, y, size, height)
 /**
  * @class
  */
-function EnvironmentVisualization(d3SvgGroup, environment)
+function EnvironmentVisualization(d3SvgGroup, environment, population)
 {
   var self = this;
 
@@ -36,6 +36,9 @@ function EnvironmentVisualization(d3SvgGroup, environment)
     throw Error('EnvironmentVisualization requires and environment on construction.');
   }
   self.environment = environment;
+
+  // Remember associated population.
+  self.population = population;
 
   // Initialize an array to contain the visualization tiles.
   self.tiles = new Array(self.environment.rows * self.environment.cols);
@@ -60,9 +63,10 @@ EnvironmentVisualization.prototype.render = function(brush) {
   brush = brush ? brush : tileBrushes.terrain;
 
   // "Brush" each tile with the provided brush. This takes information from the
-  // associated environment and "colors" the tile appropriately.
+  // associated environment and population in order to "color" the tile
+  // appropriately.
   _.forEach(self.tiles, function(tile) {
-    brush(tile, self.environment);
+    brush(tile, self.environment, self.population);
   });
 
   // Create the D3 selection.
