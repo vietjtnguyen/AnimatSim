@@ -61,7 +61,7 @@ describe('The Environment module', function() {
       environment.vegetation.iterateVertices(function(value, arr, x, y) {
         preVegetationSum += value;
       });
-      for ( var i = 0; i < 100; i += 1 )
+      for ( var i = 0; i < 25; i += 1 )
       {
         environment.step();
       }
