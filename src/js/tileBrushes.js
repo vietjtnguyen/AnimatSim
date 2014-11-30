@@ -5,7 +5,7 @@ var colors = require('./colors');
 
 var exports = {};
 
-exports.TileTerrainBrush = function(tile, environment)
+exports.terrain = function(tile, environment)
 {
   if( tile.height < environment.waterLevel )
   {
@@ -21,28 +21,28 @@ exports.TileTerrainBrush = function(tile, environment)
   }
 };
 
-exports.TileTemperatureBrush = function(tile, environment)
+exports.temperature = function(tile, environment)
 {
   var temperature = environment.temperature.values[tile.row][tile.col];
   var temperatureColor = d3.rgb(colors.temperatureColorScale(temperature));
   tile.color = temperatureColor;
 };
 
-exports.TileMoistureBrush = function(tile, environment)
+exports.moisture = function(tile, environment)
 {
   var moisture = environment.moisture.values[tile.row][tile.col];
   var moistureColor = d3.rgb(colors.moistureColorScale(moisture));
   tile.color = moistureColor;
 };
 
-exports.TileVegetationBrush = function(tile, environment)
+exports.vegetation = function(tile, environment)
 {
   var vegetation = environment.vegetation.values[tile.row][tile.col];
   var vegetationColor = d3.rgb(colors.vegetationColorScale(tile.height));
   tile.color = colors.lerp(d3.rgb(0, 0, 0), vegetationColor, vegetation);
 };
 
-exports.TileAnimatDensityBrush = function(tile, environment)
+exports.animatDensity = function(tile, environment)
 {
   var animatDensity = environment.animatDensity.values[tile.row][tile.col] / (app.populationSize * 0.05);
   var animatDensityColor = d3.rgb(colors.animatDensityColorScale(animatDensity));

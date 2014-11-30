@@ -6,6 +6,7 @@ namespace.d3 = require('d3');
 
 namespace.Environment = require('./Environment');
 namespace.EnvironmentVisualization = require('./EnvironmentVisualization');
+namespace.tileBrushes = require('./tileBrushes');
 namespace.MeshGrid = require('./MeshGrid');
 
 // Basically, if we're in a browser/client environment then we want to throw
