@@ -10,6 +10,7 @@ describe('The BaseEnvironment module', function() {
     var baseEnvironment = new BaseEnvironment();
     expect(baseEnvironment).to.exist();
   });
+
   describe('The BaseEnvironment class', function() {
     it('should construct with sensible defaults', function() {
       var baseEnvironment = new BaseEnvironment();

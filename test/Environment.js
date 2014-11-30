@@ -10,6 +10,7 @@ describe('The Environment module', function() {
     var environment = new Environment();
     expect(environment).to.exist();
   });
+
   describe('The Environment class', function() {
     // TODO: The following three tests are from BaseEnvironment. Should they
     // even be included here? How can you test correct prototype chaining?
@@ -50,5 +51,6 @@ describe('The Environment module', function() {
       expect(environment.vegetation).to.exist();
       expect(environment.animatDensity).to.exist();
     });
+    it('should, with default settings, gain more vegetation during isolated simulation');
   });
 });

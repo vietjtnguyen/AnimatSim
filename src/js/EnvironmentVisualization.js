@@ -11,11 +11,11 @@ function TileTerrainBrush(tile, environment)
   }
   else
   {
-    var t = util.clamp((tile.height - environment.waterLevel) / 0.025, 0.0, 1.0);
+    var t = _.clamp((tile.height - environment.waterLevel) / 0.025, 0.0, 1.0);
     var terrainColor = d3.rgb(colors.terrainColorScale(tile.height));
     var vegetationColor = d3.rgb(colors.vegetationColorScale(tile.height));
     var vegetationValue = environment.vegetation.values[tile.row][tile.col];
-    tile.color = util.lerpColor(colors.waterColor, util.lerpColor(terrainColor, vegetationColor, vegetationValue), t);
+    tile.color = colors.lerp(colors.waterColor, colors.lerp(terrainColor, vegetationColor, vegetationValue), t);
   }
 }
 
@@ -37,35 +37,32 @@ function TileVegetationBrush(tile, environment)
 {
   var vegetation = environment.vegetation.values[tile.row][tile.col];
   var vegetationColor = d3.rgb(colors.vegetationColorScale(tile.height));
-  tile.color = util.lerpColor(d3.rgb(0, 0, 0), vegetationColor, vegetation);
+  tile.color = colors.lerp(d3.rgb(0, 0, 0), vegetationColor, vegetation);
 }
 
 function TileAnimatDensityBrush(tile, environment)
 {
   var animatDensity = environment.animatDensity.values[tile.row][tile.col] / (app.populationSize * 0.05);
   var animatDensityColor = d3.rgb(colors.animatDensityColorScale(animatDensity));
-  tile.color = util.lerpColor(d3.rgb(0, 0, 0), animatDensityColor, Math.sqrt(animatDensity));
+  tile.color = colors.lerp(d3.rgb(0, 0, 0), animatDensityColor, Math.sqrt(animatDensity));
 }
 
 /**
+ * A simple container class to represent the visual information of an
+ * environment tile.
  * @class
  */
 function Tile(row, col, x, y, size, height)
 {
-  this.row = row;
-  this.col = col;
-  this.x = x;
-  this.y = y;
-  this.size = size;
-  this.height = height; // height won't change so let's cache the value
-  this.color = d3.rgb(255, 255, 255);
-}
-
-Tile.prototype.brushWith = function(brush, environment)
-{
   var self = this;
-  brush(self, environment);
-};
+  self.row = row;
+  self.col = col;
+  self.x = x;
+  self.y = y;
+  self.size = size;
+  self.height = height; // height won't change so let's cache the value
+  self.color = d3.rgb(255, 255, 255);
+}
 
 /**
  * @class
@@ -78,47 +75,50 @@ function EnvironmentVisualization(d3SvgGroup, environment)
   self.d3SvgGroup = d3SvgGroup;
 
   // Remember associated environment.
+  if ( !environment )
+  {
+    throw Error('EnvironmentVisualization requires and environment on construction.');
+  }
   self.environment = environment;
-
-  // Initialize the environment display.
-  self.tileDisplayMode = settings.ED_NORMAL; // FIXME: Reference error.
 
   // Initialize an array to contain the visualization tiles.
   self.tiles = new Array(self.environment.rows * self.environment.cols);
-  self.iterateVertices(function(value, arr, i, j)
+  self.environment.terrain.iterateVertices(function(value, arr, i, j)
   {
-    self.tiles[i * self.environment.cols + j] = new Tile(
+    self.tiles[i * (self.environment.cols + 1) + j] = new Tile(
       i, j,
-      j * environment.segmentLength, i * environment.segmentLength,
-      environment.segmentLength,
+      j * environment.tileSize, i * environment.tileSize,
+      environment.tileSize,
       arr[i][j]);
   });
 }
 
-EnvironmentVisualization.ED_NORMAL = 0;
-EnvironmentVisualization.ED_TEMPERATURE_ONLY = 1;
-EnvironmentVisualization.ED_MOISTURE_ONLY = 2;
-EnvironmentVisualization.ED_VEGETATION_ONLY = 3;
-EnvironmentVisualization.ED_ANIMAT_DENSITY_ONLY = 4;
-EnvironmentVisualization.numOfEnvironmentDisplayModes = 5;
-
-EnvironmentVisualization.render = function(brush) {
+/**
+ */
+EnvironmentVisualization.prototype.render = function(brush) {
   var self = this;
 
+  // If the brush is a function, call it with the associated environment.
+  // Otherwise use the brush. If no brush is defined, used the terrain brush by
+  // default.
+  brush = brush ? brush : TileTerrainBrush;
+
+  // "Brush" each tile with the provided brush. This takes information from the
+  // associated environment and "colors" the tile appropriately.
   _.forEach(self.tiles, function(tile) {
-    tile.paintWith(brush);
+    brush(tile, self.environment);
   });
 
   // Create the D3 selection.
-  var tilesSelection = this.d3SvgGroup.selectAll('.tile').data(this.tiles);
+  var tilesD3Selection = self.d3SvgGroup.selectAll('rect').data(self.tiles);
 
-  // Add any missing times.
+  // Add any missing tiles.
   // TODO: Pre-initialize this and just cache the resulting selection.
-  tilesSelection.enter().append('rect')
+  tilesD3Selection.enter().append('rect')
     .classed('tile', true);
 
-  // Update the SVG visualization. Assumes that Tile.update has been called prior.
-  tilesSelection 
+  // Update the tile visualizations.
+  tilesD3Selection 
     .attr('x', function(d) { return d.x - d.size * 0.5; })
     .attr('y', function(d) { return d.y - d.size * 0.5; })
     .attr('width', function(d) { return d.size; })
@@ -127,13 +127,5 @@ EnvironmentVisualization.render = function(brush) {
   ;
 };
 
-EnvironmentVisualization.prototype.iterateTiles = function(func)
-{
-  var self = this;
-  for ( var i = 0; i < this.tiles.length; i += 1 )
-  {
-    func(this.tiles, i, this.tiles[i]);
-  }
-};
-
 module.exports = EnvironmentVisualization;
+

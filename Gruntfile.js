@@ -3,6 +3,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-browserify');
   grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-contrib-connect');
+  grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-watch');
@@ -11,30 +12,38 @@ module.exports = function(grunt) {
 
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
-    concat: {
-      options: {
-        separator: ';'
-      },
-      dist: {
-        src: ['src/js/.js'],
-        dest: 'dist/<%= pkg.name %>.js'
+    copy: {
+      main: {
+        files: [
+          { expand: true, cwd: 'src/css', src: '*.css', dest: 'dist/css/' },
+          { expand: true, cwd: 'src', src: '*.html', dest: 'dist/' }
+        ]
       }
     },
-    browserify: {
-      dist: {
-        files: {"dist/animats.js": ["src/sim/js/animats.js"]}
-      }
-    },
-    // uglify: {
+    // concat: {
     //   options: {
-    //     banner: '/*! <%= pkg.name %> <%= grunt.template.today("dd-mm-yyyy") %> */\n'
+    //     separator: ';'
     //   },
     //   dist: {
-    //     files: {
-    //       'dist/<%= pkg.name %>.min.js': ['<%= concat.dist.dest %>']
-    //     }
+    //     src: ['src/js/.js'],
+    //     dest: 'dist/<%= pkg.name %>.js'
     //   }
     // },
+    browserify: {
+      dist: {
+        files: {"dist/js/AnimatSim.js": ["src/js/AnimatSim.js"]}
+      }
+    },
+    uglify: {
+      // options: {
+      //   banner: '/*! <%= pkg.name %> <%= grunt.template.today("dd-mm-yyyy") %> */\n'
+      // },
+      dist: {
+        files: {
+          'dist/js/AnimatSim.min.js': ['dist/js/AnimatSim.js']
+        }
+      }
+    },
     jsdoc: {
       dist: {
         src: ['src/**/*.js', 'README.md'],
@@ -65,15 +74,15 @@ module.exports = function(grunt) {
     },
     watch: {
       files: ['<%= jshint.files %>'],
-      tasks: ['jshint', 'mochaTest', 'jsdoc']
+      tasks: ['jshint', 'mochaTest', 'jsdoc', 'browserify', 'uglify', 'copy']
     }
   });
 
-  grunt.registerTask('build', ['browserify']);//, 'concat', 'uglify']);
+  grunt.registerTask('build', ['browserify', 'uglify']);//, 'concat', 'uglify']);
   grunt.registerTask('docs', ['jsdoc']);
   grunt.registerTask('test', ['jshint', 'mochaTest']);
 
-  grunt.registerTask('default', ['jsdoc', 'jshint', 'mochaTest']);
+  grunt.registerTask('default', ['jsdoc', 'jshint', 'mochaTest', 'browserify', 'uglify', 'copy']);
   // TODO: Add a documentation task.
 
 };
