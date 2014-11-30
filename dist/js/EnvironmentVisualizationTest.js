@@ -28,7 +28,7 @@ var brushes = [
   AnimatSim.tileBrushes.temperature,
   AnimatSim.tileBrushes.moisture,
   AnimatSim.tileBrushes.vegetation
-  // AnimatSim.tileBrushes.animatDensity
+  // AnimatSim.tileBrushes.animatDensity // commented out because there is no population yet
 ];
 
 window.onkeyup = function(arg)
