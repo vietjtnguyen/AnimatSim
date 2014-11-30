@@ -21,30 +21,30 @@ exports.terrain = function(tile, environment)
   }
 };
 
-exports.temperature = function(tile, environment)
+exports.temperature = function(tile, environment, population)
 {
   var temperature = environment.temperature.values[tile.row][tile.col];
   var temperatureColor = d3.rgb(colors.temperatureColorScale(temperature));
   tile.color = temperatureColor;
 };
 
-exports.moisture = function(tile, environment)
+exports.moisture = function(tile, environment, population)
 {
   var moisture = environment.moisture.values[tile.row][tile.col];
   var moistureColor = d3.rgb(colors.moistureColorScale(moisture));
   tile.color = moistureColor;
 };
 
-exports.vegetation = function(tile, environment)
+exports.vegetation = function(tile, environment, population)
 {
   var vegetation = environment.vegetation.values[tile.row][tile.col];
   var vegetationColor = d3.rgb(colors.vegetationColorScale(tile.height));
   tile.color = colors.lerp(d3.rgb(0, 0, 0), vegetationColor, vegetation);
 };
 
-exports.animatDensity = function(tile, environment)
+exports.animatDensity = function(tile, environment, population)
 {
-  var animatDensity = environment.animatDensity.values[tile.row][tile.col] / (app.populationSize * 0.05);
+  var animatDensity = environment.animatDensity.values[tile.row][tile.col] / (population.size * 0.05);
   var animatDensityColor = d3.rgb(colors.animatDensityColorScale(animatDensity));
   tile.color = colors.lerp(d3.rgb(0, 0, 0), animatDensityColor, Math.sqrt(animatDensity));
 };
