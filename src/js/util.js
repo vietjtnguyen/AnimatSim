@@ -25,12 +25,16 @@ _.clamp = function(x, a, b)
 };
 
 /**
+ * Increments the value x but loops it inside the interval [a, b).
  */
 _.incLoop = function(x, a, b)
 {
   return a + (x - a + 1) % (b - a);
 };
 
+/**
+ * Decrements the value x but loops it inside the interval [a, b).
+ */
 _.decLoop = function(x, a, b)
 {
   return a + (x - a - 1 + (b - a)) % (b - a);
