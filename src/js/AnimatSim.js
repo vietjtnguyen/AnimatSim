@@ -2,7 +2,9 @@ var _ = require('./util');
 var namespace = {};
 
 namespace._ = _;
+namespace.$ = require('jquery');
 namespace.d3 = require('d3');
+namespace.queryString = require('query-string');
 
 namespace.Environment = require('./Environment');
 namespace.EnvironmentVisualization = require('./EnvironmentVisualization');
@@ -28,5 +30,7 @@ else
   // access LoDash and D3 via AnimatSim._ and AnimatSim.d3 respectively (though
   // they are still available there anyway.
   window._ = namespace._;
+  window.$ = namespace.$;
   window.d3 = namespace.d3;
+  window.queryString = namespace.queryString;
 }
