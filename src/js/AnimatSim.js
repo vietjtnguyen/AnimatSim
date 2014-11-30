@@ -20,12 +20,13 @@ if ( _.isUndefined(window) )
 }
 else
 {
-  // Export our namespace.
   window.AnimatSim = namespace;
 
-  // Export a few third-party libraries into the global namespace for easier
-  // access and debugging (as if the library sources were included in the HTML
-  // page).
+  // Export a few third-party libraries into the global namespace directly for
+  // easier access and debugging. This emulates including these libraries as
+  // <script> includes in the HTML page. If this isn't done we would have to
+  // access LoDash and D3 via AnimatSim._ and AnimatSim.d3 respectively (though
+  // they are still available there anyway.
   window._ = namespace._;
   window.d3 = namespace.d3;
 }
