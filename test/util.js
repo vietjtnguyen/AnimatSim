@@ -28,6 +28,18 @@ describe('The util module', function() {
     });
   });
 
+  describe('The incLoop function', function() {
+    it('should return the max-1 of the interval for a value at max-2 of the interval', function() {
+      expect(_.incLoop(3, 2, 5)).to.equal(4);
+    });
+    it('should return the min of the interval for a value at max-1 of the interval', function() {
+      expect(_.incLoop(4, 2, 5)).to.equal(2);
+    });
+    it('should return min+1 of the interval for a value at max of the interval', function() {
+      expect(_.incLoop(5, 2, 5)).to.equal(3);
+    });
+  });
+
   describe('The resultObject function', function() {
     it('should return a simple (no functions) object unmodified', function() {
       var a = {a: 1, b: 'foo', c: 3.14, d: {e: 2, f: 'bar', g: '1.67'}};
