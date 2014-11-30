@@ -19,8 +19,21 @@ var _ = require('lodash');
  * @arg b {} Upper bound.
  * @return {} <pre><code>Math.min(Math.max(x, a), b);</code></pre>
  */
-_.clamp = function(x, a, b) {
+_.clamp = function(x, a, b)
+{
 	return Math.min(Math.max(x, a), b);
+};
+
+/**
+ */
+_.incLoop = function(x, a, b)
+{
+  return a + (x - a + 1) % (b - a);
+};
+
+_.decLoop = function(x, a, b)
+{
+  return a + (x - a - 1 + (b - a)) % (b - a);
 };
 
 /**
@@ -31,9 +44,11 @@ _.clamp = function(x, a, b) {
  * @arg defaultValue [{}] The value to set a key that is undefined. By default this is just undefined.
  * @return {Object}
  */
-_.resultObject = function(object, defaultValue) {
+_.resultObject = function(object, defaultValue)
+{
   return _.mapValues(object, function(value, key, object) {
-    if (typeof value == 'undefined') {
+    if ( typeof value == 'undefined' )
+    {
       return defaultValue;
     }
     return _.isFunction(value) ? object[key]() : value;
