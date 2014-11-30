@@ -39,9 +39,13 @@ describe('The util module', function() {
       expect(_.incLoop(5, 2, 5)).to.equal(3);
     });
     it('should work with negative numbers', function() {
-      expect(_.incLoop(-3, -5, -1)).to.equal(-2);
-      expect(_.incLoop(-2, -5, -1)).to.equal(-5);
+      expect(_.incLoop( 0, -5, -1)).to.equal(-3);
       expect(_.incLoop(-1, -5, -1)).to.equal(-4);
+      expect(_.incLoop(-2, -5, -1)).to.equal(-5);
+      expect(_.incLoop(-3, -5, -1)).to.equal(-2);
+      expect(_.incLoop(-4, -5, -1)).to.equal(-3);
+      expect(_.incLoop(-5, -5, -1)).to.equal(-4);
+      expect(_.incLoop(-6, -5, -1)).to.equal(-5);
     });
   });
 
