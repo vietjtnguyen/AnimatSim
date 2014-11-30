@@ -18,7 +18,7 @@
   "scripts": {
     "build": "grunt build",
     "doc": "grunt doc",
-    "test": "grunt test"
+    "test": "grunt test",
     "make": "grunt default"
   },
   "private": true,
