@@ -1,0 +1,40 @@
+.invisible-mouse-capture {
+  fill: none;
+  pointer-events: all;
+}
+
+.node {
+  fill: #fff;
+  stroke: #000;
+  stroke-width: 1px;
+}
+
+.tile {
+  fill: #ffffff;
+  stroke-width: 0px;
+}
+
+.animat {
+  fill: #ffffff;
+  stroke-width: 0px;
+}
+
+.data-label {
+  font-family: serif;
+  font-weight: 400;
+  font-size: 1em;
+  font-color: #000000;
+  margin: 0px;
+  margin-left: 10px;
+  margin-bottom: 10px;
+}
+
+.log-label {
+  font-family: monospace;
+  font-size: 1em;
+  font-color: #808080;
+  margin: 0px;
+  margin-left: 20px;
+  margin-bottom: 4px;
+}
+
