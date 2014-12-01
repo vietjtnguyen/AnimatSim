@@ -13,13 +13,15 @@ var Population = function()
   this.deadAnimats = [];
 };
 
-// ---- methods
-
+/**
+ */
 Population.prototype.add = function(animat)
 {
   this.aliveAnimats.push(animat);
 };
 
+/**
+ */
 Population.prototype.populateRandom = function(numOfAnimats)
 {
   for( var i = 0; i < numOfAnimats; i+= 1 )
@@ -29,6 +31,8 @@ Population.prototype.populateRandom = function(numOfAnimats)
   }
 };
 
+/**
+ */
 Population.prototype.update = function()
 {
   var i;
@@ -53,6 +57,8 @@ Population.prototype.update = function()
   }
 };
 
+/**
+ */
 Population.prototype.killAll = function() {
   var self = this;
   while( self.aliveAnimats.length > 0 )
@@ -61,6 +67,8 @@ Population.prototype.killAll = function() {
   }
 };
 
+/**
+ */
 Population.prototype.serialize = function() {
   var i;
   var animat;
@@ -95,6 +103,8 @@ Population.prototype.serialize = function() {
   return JSON.stringify(animats, null, '\t');
 };
 
+/**
+ */
 Population.prototype.unserialize = function(animatData)
 {
   var i;
@@ -134,8 +144,6 @@ Population.prototype.unserialize = function(animatData)
     }
   }
 };
-
-// ---- statics
 
 module.exports = Population;
 
