@@ -1,5 +1,13 @@
+/**
+ * @module
+ */
+
 var exports = {};
 
+/**
+ * @name cartesianToPolar
+ * @function
+ */
 exports.cartesianToPolar = function(xy) {
   return [
     Math.atan2(xy[1], xy[0]),
@@ -7,6 +15,10 @@ exports.cartesianToPolar = function(xy) {
   ];
 };
 
+/**
+ * @name polarToCartesian
+ * @function
+ */
 exports.polarToCartesian = function(rd) {
   return [
     Math.cos(rd[1]) * rd[0],
@@ -14,6 +26,10 @@ exports.polarToCartesian = function(rd) {
   ];
 };
 
+/**
+ * @name rotateVec
+ * @function
+ */
 exports.rotateVec = function(xy, ang)
 {
   return [

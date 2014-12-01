@@ -8,6 +8,7 @@
  * x <= 1.0 // true
  * _.isEqual(_.keys({a: 1, b: 2}), ['a', 'b']) // true, regular lodash still there
  */
+
 var _ = require('lodash');
 
 /**
