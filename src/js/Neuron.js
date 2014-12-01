@@ -16,11 +16,10 @@ function simpleRelu(x) {
   return Math.max(x, 0);
 }
 
-// -------------------------------------------------------------------------
-// Neuron
-
-// ---- constructor
-
+/**
+ * @classdesc
+ * @class
+ */
 var Neuron = function(index, sign, threshold, domainScale, stochasticity)
 {
   this.index = index;
@@ -31,8 +30,8 @@ var Neuron = function(index, sign, threshold, domainScale, stochasticity)
   this.connections = [];
 };
 
-// ---- methods
-
+/**
+ */
 Neuron.prototype.connect = function(neuron, strength)
 {
   return this.connections.push({
@@ -41,6 +40,9 @@ Neuron.prototype.connect = function(neuron, strength)
   });
 };
 
+
+/**
+ */
 Neuron.prototype.processInput = function()
 {
   this.totalInput = 0.0;
@@ -51,11 +53,17 @@ Neuron.prototype.processInput = function()
   }
 };
 
+
+/**
+ */
 Neuron.prototype.setInput = function(value)
 {
   this.totalInput = value;
 };
 
+
+/**
+ */
 Neuron.prototype.fire = function()
 {
   if( simpleSigmoid(this.totalInput * this.domainScale) >= this.threshold )
@@ -70,6 +78,8 @@ Neuron.prototype.fire = function()
 
 // I don't have to worry about neuronal consistency because the neurons are
 // all the same by construction. This isn't ideal.
+/**
+ */
 Neuron.prototype.toGene = function()
 {
   var gene = [this.threshold, this.domainScale, this.stochasticity];
@@ -80,6 +90,8 @@ Neuron.prototype.toGene = function()
   return gene;
 };
 
+/**
+ */
 Neuron.prototype.fromGene = function(gene)
 {
   this.threshold = gene[0];
@@ -91,8 +103,8 @@ Neuron.prototype.fromGene = function(gene)
   }
 };
 
-// ---- statics
-
+/**
+ */
 Neuron.mixGenes = function(geneA, geneB, crossOverRate, mutationRate)
 {
   var gene = [];
@@ -137,6 +149,8 @@ Neuron.mixGenes = function(geneA, geneB, crossOverRate, mutationRate)
   return gene;
 };
 
+/**
+ */
 Neuron.mutateGene = function(gene)
 {
   var mutatedGene = new Array(gene.length);
