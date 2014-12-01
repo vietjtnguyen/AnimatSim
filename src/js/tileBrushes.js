@@ -1,3 +1,7 @@
+/**
+ * @module
+ */
+
 var d3 = require('d3');
 
 var _ = require('./util');
@@ -5,6 +9,10 @@ var colors = require('./colors');
 
 var exports = {};
 
+/**
+ * @name terrain
+ * @function
+ */
 exports.terrain = function(tile, environment)
 {
   if( tile.height < environment.waterLevel )
@@ -21,6 +29,10 @@ exports.terrain = function(tile, environment)
   }
 };
 
+/**
+ * @name temperature
+ * @function
+ */
 exports.temperature = function(tile, environment, population)
 {
   var temperature = environment.temperature.values[tile.row][tile.col];
@@ -28,6 +40,10 @@ exports.temperature = function(tile, environment, population)
   tile.color = temperatureColor;
 };
 
+/**
+ * @name moisture
+ * @function
+ */
 exports.moisture = function(tile, environment, population)
 {
   var moisture = environment.moisture.values[tile.row][tile.col];
@@ -35,6 +51,10 @@ exports.moisture = function(tile, environment, population)
   tile.color = moistureColor;
 };
 
+/**
+ * @name vegetation
+ * @function
+ */
 exports.vegetation = function(tile, environment, population)
 {
   var vegetation = environment.vegetation.values[tile.row][tile.col];
@@ -42,6 +62,10 @@ exports.vegetation = function(tile, environment, population)
   tile.color = colors.lerp(d3.rgb(0, 0, 0), vegetationColor, vegetation);
 };
 
+/**
+ * @name animatDensity
+ * @function
+ */
 exports.animatDensity = function(tile, environment, population)
 {
   var animatDensity = environment.animatDensity.values[tile.row][tile.col] / (population.size * 0.05);
