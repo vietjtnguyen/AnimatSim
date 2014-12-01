@@ -53,7 +53,7 @@ _.decLoop = function(x, a, b)
  * @name resultObject
  * @function
  * @arg object {Object}
- * @arg defaultValue [*] The value to set a key that is undefined. By default this is just undefined.
+ * @arg defaultValue [{}] The value to set a key that is undefined. By default this is just undefined.
  * @return {Object}
  * @memberof module:util
  */
