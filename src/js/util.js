@@ -1,6 +1,6 @@
 /**
  * Extends LoDash with a clamp function and then re-exports it. That's it.
- * @module
+ * @module util
  * @example
  * var _ = require('./util');
  * var x = _.clamp(_.random(-100.0, 100.0), -1.0, 1.0);
@@ -19,6 +19,7 @@ var _ = require('lodash');
  * @arg a {} Lower bound.
  * @arg b {} Upper bound.
  * @return {} <pre><code>Math.min(Math.max(x, a), b);</code></pre>
+ * @memberof module:util
  */
 _.clamp = function(x, a, b)
 {
@@ -27,6 +28,7 @@ _.clamp = function(x, a, b)
 
 /**
  * Increments the value x but loops it inside the interval [a, b).
+ * @memberof module:util
  */
 _.incLoop = function(x, a, b)
 {
@@ -35,6 +37,7 @@ _.incLoop = function(x, a, b)
 
 /**
  * Decrements the value x but loops it inside the interval [a, b).
+ * @memberof module:util
  */
 _.decLoop = function(x, a, b)
 {
@@ -48,6 +51,7 @@ _.decLoop = function(x, a, b)
  * @arg object {Object}
  * @arg defaultValue [{}] The value to set a key that is undefined. By default this is just undefined.
  * @return {Object}
+ * @memberof module:util
  */
 _.resultObject = function(object, defaultValue)
 {

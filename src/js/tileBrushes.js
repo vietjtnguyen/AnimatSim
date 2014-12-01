@@ -32,6 +32,7 @@ exports.terrain = function(tile, environment)
 /**
  * @name temperature
  * @function
+ * @memberof module:tileBrushes
  */
 exports.temperature = function(tile, environment, population)
 {
@@ -43,6 +44,7 @@ exports.temperature = function(tile, environment, population)
 /**
  * @name moisture
  * @function
+ * @memberof module:tileBrushes
  */
 exports.moisture = function(tile, environment, population)
 {
@@ -54,6 +56,7 @@ exports.moisture = function(tile, environment, population)
 /**
  * @name vegetation
  * @function
+ * @memberof module:tileBrushes
  */
 exports.vegetation = function(tile, environment, population)
 {
@@ -65,6 +68,7 @@ exports.vegetation = function(tile, environment, population)
 /**
  * @name animatDensity
  * @function
+ * @memberof module:tileBrushes
  */
 exports.animatDensity = function(tile, environment, population)
 {
