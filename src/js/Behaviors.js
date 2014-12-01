@@ -1,3 +1,5 @@
+var _ = require('./util');
+var geom = require('./geom');
 
 function constrainInsideEnvironment(animat, environment, population)
 {
