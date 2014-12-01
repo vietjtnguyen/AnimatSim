@@ -1,18 +1,17 @@
-/**
- * @module tileBrushes
- */
-
 var d3 = require('d3');
 
 var _ = require('./util');
 var colors = require('./colors');
 
+/**
+ * @module tileBrushes
+ */
 var exports = {};
 
 /**
  * @name terrain
  * @function
- * @memberof tileBrushes
+ * @memberof module:tileBrushes
  */
 exports.terrain = function(tile, environment)
 {
