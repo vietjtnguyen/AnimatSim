@@ -1,4 +1,5 @@
 var _ = require('./util');
+var geom = require('./geom');
 
 /**
  * @classdesc
@@ -41,21 +42,21 @@ Behavior.prototype.update = function()
   self.farAltitude = app.environment.getValue(self.farX, self.farY, 'terrain');
   self.swimming = self.altitude < app.environment.waterLevel;
   self.farWater = self.farAltitude < app.environment.waterLevel;
-  self.slope = util.rotateVec(app.environment.getGradient(self.x, self.y, 'terrain'), -self.dir);
+  self.slope = geom.rotateVec(app.environment.getGradient(self.x, self.y, 'terrain'), -self.dir);
 
   self.temperature = app.environment.getValue(self.x, self.y, 'temperature');
-  self.temperatureGradient = util.rotateVec(app.environment.getGradient(self.x, self.y, 'temperature'), -self.dir);
+  self.temperatureGradient = geom.rotateVec(app.environment.getGradient(self.x, self.y, 'temperature'), -self.dir);
 
   self.moisture = app.environment.getValue(self.x, self.y, 'moisture');
-  self.moistureGradient = util.rotateVec(app.environment.getGradient(self.x, self.y, 'moisture'), -self.dir);
+  self.moistureGradient = geom.rotateVec(app.environment.getGradient(self.x, self.y, 'moisture'), -self.dir);
 
   self.vegetation = app.environment.getValue(self.x, self.y, 'vegetation');
   self.farVegetation = app.environment.getValue(self.farX, self.farY, 'vegetation');
-  self.vegetationGradient = util.rotateVec(app.environment.getGradient(self.x, self.y, 'vegetation'), -self.dir);
+  self.vegetationGradient = geom.rotateVec(app.environment.getGradient(self.x, self.y, 'vegetation'), -self.dir);
 
   self.animatDensity = _.clamp(app.environment.getValue(self.x, self.y, 'animatDensity') - 0.6, 0.0, app.populationSize);
   self.farAnimatDensity = _.clamp(app.environment.getValue(self.farX, self.farY, 'animatDensity') - 0.6, 0.0, app.populationSize);
-  self.animatDensityGradient = util.rotateVec(app.environment.getGradient(self.x, self.y, 'animatDensity'), -self.dir);
+  self.animatDensityGradient = geom.rotateVec(app.environment.getGradient(self.x, self.y, 'animatDensity'), -self.dir);
 
   // Update sensors in the brain. Zero direction in self coordinate system is
   // at positive X. This means left is -Y, right is +Y, forward is +X, and
