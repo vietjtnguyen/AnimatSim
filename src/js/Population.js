@@ -1,13 +1,11 @@
 var Animat = require('./animat');
 
-// -------------------------------------------------------------------------
-// Population
-// Represents a population of animats and handles updating the animats,
-// killing them, populating them, handling generational changes, and
-// rendering them.
-
-// ---- constructor
-
+/**
+ * @classdesc Represents a population of animats and handles updating the
+ * animats, killing them, populating them, handling generational changes, and
+ * rendering them.
+ * @class
+ */
 var Population = function()
 {
   this.animatCounter = 0;
