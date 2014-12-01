@@ -28,6 +28,8 @@ _.clamp = function(x, a, b)
 
 /**
  * Increments the value x but loops it inside the interval [a, b).
+ * @name incLoop
+ * @function
  * @memberof module:util
  */
 _.incLoop = function(x, a, b)
@@ -37,6 +39,8 @@ _.incLoop = function(x, a, b)
 
 /**
  * Decrements the value x but loops it inside the interval [a, b).
+ * @name decLoop
+ * @function
  * @memberof module:util
  */
 _.decLoop = function(x, a, b)
@@ -49,7 +53,7 @@ _.decLoop = function(x, a, b)
  * @name resultObject
  * @function
  * @arg object {Object}
- * @arg defaultValue [{}] The value to set a key that is undefined. By default this is just undefined.
+ * @arg defaultValue [*] The value to set a key that is undefined. By default this is just undefined.
  * @return {Object}
  * @memberof module:util
  */

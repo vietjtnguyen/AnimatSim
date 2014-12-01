@@ -1,5 +1,5 @@
 /**
- * @module
+ * @module geom
  */
 
 var exports = {};
@@ -7,6 +7,7 @@ var exports = {};
 /**
  * @name cartesianToPolar
  * @function
+ * @memberof module:geom
  */
 exports.cartesianToPolar = function(xy) {
   return [
@@ -18,6 +19,7 @@ exports.cartesianToPolar = function(xy) {
 /**
  * @name polarToCartesian
  * @function
+ * @memberof module:geom
  */
 exports.polarToCartesian = function(rd) {
   return [
@@ -29,6 +31,7 @@ exports.polarToCartesian = function(rd) {
 /**
  * @name rotateVec
  * @function
+ * @memberof module:geom
  */
 exports.rotateVec = function(xy, ang)
 {
