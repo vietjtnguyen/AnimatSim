@@ -1,17 +1,25 @@
 var _ = require('./util');
 
+/**
+ */
 function simpleSquash(x, a) {
 	return (a + 2) * (x - 0.5) / (1 + a * Math.abs(x - 0.5));
 }
 
+/**
+ */
 function simpleNormalizedSquash(x, a) {
 	return simpleSquash(x, a) * 0.5 + 0.5;
 }
 
+/**
+ */
 function simpleSigmoid(x) {
 	return x / (1.0 + Math.abs(x));
 }
 
+/**
+ */
 function simpleRelu(x) {
   return Math.max(x, 0);
 }

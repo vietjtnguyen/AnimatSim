@@ -2,6 +2,10 @@ var _ = require('./util');
 
 var Neuron = require('./Neuron');
 
+/**
+ * @classdesc
+ * @class
+ */
 var Brain = function()
 {
   // TODO: This distinction between input and non input neurons isn't actually used anywhere.
@@ -9,16 +13,22 @@ var Brain = function()
   this.nonInputNeurons = [];
 };
 
+/**
+ */
 Brain.prototype.addInputNeuron = function(neuron)
 {
   return this.inputNeurons.push(neuron);
 };
 
+/**
+ */
 Brain.prototype.addNonInputNeuron = function(neuron)
 {
   return this.nonInputNeurons.push(neuron);
 };
 
+/**
+ */
 Brain.prototype.step = function()
 {
   var i;
@@ -43,6 +53,8 @@ Brain.prototype.step = function()
 // Right now I cheat because I have a set topology so this genome-making
 // process ensures the neurons represent the same thing in the same order
 // simply via consistent construction.
+/**
+ */
 Brain.prototype.toGenome = function()
 {
   var i;
@@ -58,6 +70,8 @@ Brain.prototype.toGenome = function()
   return genome;
 };
 
+/**
+ */
 Brain.prototype.fromGenome = function(genome)
 {
   var i;
@@ -71,8 +85,8 @@ Brain.prototype.fromGenome = function(genome)
   }
 };
 
-// ---- statics
-
+/**
+ */
 Brain.mixGenomes = function(genomeA, genomeB, crossOverRate, mutationRate, geneCrossOverRate, geneMutationRate)
 {
   var genome = [];
@@ -116,6 +130,8 @@ Brain.mixGenomes = function(genomeA, genomeB, crossOverRate, mutationRate, geneC
   return genome;
 };
 
+/**
+ */
 Brain.markI = function()
 {
   var neuronIndex = -1;
@@ -223,6 +239,8 @@ Brain.markI = function()
   return brain;
 };
 
+/**
+ */
 Brain.markII = function()
 {
   var neuronIndex = -1;
@@ -340,6 +358,8 @@ Brain.markII = function()
   return brain;
 };
 
+/**
+ */
 Brain.markIIb = function()
 {
   var neuronIndex = -1;
