@@ -24,7 +24,9 @@ Behavior.defaultSettings =
  */
 Behavior.validSettingKeys = _.keys(Behavior.defaultSettings);
 
-Animat.prototype.update = function()
+/**
+ */
+Behavior.prototype.update = function()
 {
   var self = this;
 
