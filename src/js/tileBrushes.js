@@ -1,5 +1,5 @@
 /**
- * @module
+ * @module tileBrushes
  */
 
 var d3 = require('d3');
@@ -12,6 +12,7 @@ var exports = {};
 /**
  * @name terrain
  * @function
+ * @memberof tileBrushes
  */
 exports.terrain = function(tile, environment)
 {
