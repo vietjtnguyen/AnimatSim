@@ -196,8 +196,8 @@ Behavior.prototype.update = function()
   self.y += Math.sin(self.dir) * self.moveAmount;
 
   // Keep the animat inside the environment.
-  self.x = Math.min(Math.max(self.x, 0), app.environment.size);
-  self.y = Math.min(Math.max(self.y, 0), app.environment.size);
+  self.x = _.clamp(self.x, 0, app.environment.size);
+  self.y = _.clamp(self.y, 0, app.environment.size);
 
   // Maintain history
   var historyPreference = 0.9;
