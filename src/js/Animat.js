@@ -22,6 +22,7 @@ function Animat(environment, settings, idFunc) {
   var self = this;
 
   /**
+   * @memberof Animat
    */
   self.settings = settings;
 
@@ -33,6 +34,8 @@ function Animat(environment, settings, idFunc) {
 
 
 /**
+ * @static
+ * @memberof Animat
  */
 Animat.defaultSettings =
   {
@@ -62,7 +65,7 @@ Animat.prototype.reset = function() {
 
 
 
-Animat.prototype.reset = function()
+Animat.prototype.oldReset = function()
 {
   var self = this;
   self.ticks = 0;
