@@ -3,7 +3,8 @@ var _ = require('./util');
 /**
  * @private
  */
-function makeAnimatId() {
+function makeAnimatId()
+{
   makeAnimatId.globalAnimatCounter += 1;
   return globalAnimatCounter;
 }
@@ -18,7 +19,8 @@ makeAnimatId.globalAnimatCounter = -1;
  * @arg [{function}] idFunc
  * @class
  */
-function Animat(environment, settings, idFunc) {
+function Animat(environment, settings, idFunc)
+{
   var self = this;
 
   /**
@@ -56,7 +58,8 @@ Animat.validSettingKeys = _.keys(Animat.defaultSettings);
 
 /**
  */
-Animat.prototype.reset = function() {
+Animat.prototype.reset = function()
+{
   var self = this;
 
   // Apply default settings and specified settings.
