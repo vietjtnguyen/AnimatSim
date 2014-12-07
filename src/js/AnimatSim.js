@@ -6,6 +6,8 @@ namespace._ = _;
 namespace.d3 = require('d3');
 namespace.queryString = require('query-string');
 
+// I tried wrapping this is a for loop so that only an array of module names
+// would have to be specified but that appears to break Browserify.
 namespace.Animat = require('./Animat');
 namespace.Environment = require('./Environment');
 namespace.EnvironmentVisualization = require('./EnvironmentVisualization');
