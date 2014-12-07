@@ -6,19 +6,11 @@ namespace._ = _;
 namespace.d3 = require('d3');
 namespace.queryString = require('query-string');
 
-_.forEach(
-  [
-    'Animat',
-    'Brain',
-    'Neuron',
-    'Environment',
-    'EnvironmentVisualization',
-    'tileBrushes',
-    'MeshGrid'
-  ],
-  function(module) {
-  namespace[module] = require('./' + module);
-});
+namespace.Animat = require('./Animat');
+namespace.Environment = require('./Environment');
+namespace.EnvironmentVisualization = require('./EnvironmentVisualization');
+namespace.tileBrushes = require('./tileBrushes');
+namespace.MeshGrid = require('./MeshGrid');
 
 // Basically, if we're in a browser/client environment then we want to put the
 // exports into the global namespace, which in a browser/client situation is
