@@ -33,7 +33,7 @@ Population.prototype.add = function(animat)
  */
 Population.prototype.populate = function(numOfAnimats, animatFactory, replace)
 {
-  animatFactory = animatFactory || function() { return new Animat(); };
+  animatFactory = _.isFunction(animatFactory) ? animatFactory : function() { return new Animat(); };
   replace = _.isUndefined(replace) ? false : replace;
   if ( replace )
   {
@@ -42,6 +42,16 @@ Population.prototype.populate = function(numOfAnimats, animatFactory, replace)
   else
   {
     this.aliveAnimats = this.aliveAnimats.concat(_.times(numOfAnimats, animatFactory));
+  }
+};
+
+/**
+ */
+Population.prototype.killAll = function() {
+  var self = this;
+  while ( self.aliveAnimats.length > 0 )
+  {
+    self.deadAnimats.push(self.aliveAnimats.pop());
   }
 };
 
@@ -60,16 +70,6 @@ Population.prototype.step = function(environment)
       this.deadAnimats.push(animat);
       i -= 1;
     }
-  }
-};
-
-/**
- */
-Population.prototype.killAll = function() {
-  var self = this;
-  while ( self.aliveAnimats.length > 0 )
-  {
-    self.deadAnimats.push(self.aliveAnimats.pop());
   }
 };
 
