@@ -1,4 +1,16 @@
-function PopulationVisualization() {
+function PopulationVisualization(d3SvgGroup, population)
+{
+  var self = this;
+
+  // Remember the SVG D3 selection.
+  self.d3SvgGroup = d3SvgGroup;
+
+  // Remember associated population.
+  if ( !population )
+  {
+    throw Error('PopulationVisualization requires and population on construction.');
+  }
+  self.population = population;
 }
 
 Population.prototype.render = function(root, brush)
