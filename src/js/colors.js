@@ -70,7 +70,7 @@ module.exports = {
 
   animatSwimmingColorScale: function(isSwimming)
   {
-    return isSwimming ? '#0000ff' : '#ffff00';
+    return d3.rgb(isSwimming ? '#0000ff' : '#ffff00');
   },
 
 	avoidanceColorScale: d3.scale.linear()
