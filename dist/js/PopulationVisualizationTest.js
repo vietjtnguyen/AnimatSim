@@ -54,6 +54,7 @@ window.onkeyup = function(arg)
 	{
 	  envBrushIndex = _.decLoop(envBrushIndex, 0, envBrushes.length);
 	}
+
 	if ( arg.keyCode == 69 )
 	{
 	  popBrushIndex = _.incLoop(popBrushIndex, 0, popBrushes.length);
@@ -67,6 +68,7 @@ window.onkeyup = function(arg)
 function update()
 {
 	env.step(pop);
+	pop.step();
   envVis.render(envBrushes[envBrushIndex]);
 	popVis.render(envBrushes[envBrushIndex]);
 	setTimeout(update, 1);
