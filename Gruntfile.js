@@ -74,7 +74,7 @@ module.exports = function(grunt) {
     },
     watch: {
       files: ['<%= jshint.files %>'],
-      tasks: ['jshint', 'mochaTest', 'jsdoc', 'browserify', 'uglify', 'copy']
+      tasks: ['jshint', 'mochaTest', /*'jsdoc',*/ 'browserify', 'uglify', 'copy']
     }
   });
 
