@@ -4,11 +4,9 @@ env.terrain.iterateVertices(function(value, arr, x, y) {
 });
 env.terrain.normalizeValues();
 
-var pop = null;
+var pop = new AnimatSim.Population();
 
-var container = d3.select('body')
-  .attr('style', 'align: center;')
-  .append('div')
+var container = d3.select('body').append('div')
 	.attr('style', 'width: ' + env.width + 'px ; height: ' + env.height + 'px ; margin: 0px; float: left;');
 var svg = container.append('svg')
   .attr('id', 'animat-sim-vis')
@@ -22,33 +20,55 @@ var origin = svg.append('g').attr('id', 'origin-group');
 var background = origin.append('g').attr('id', 'bg-group');
 var foreground = origin.append('g').attr('id', 'fg-group');
 
-var vis = new AnimatSim.EnvironmentVisualization(background, env);
+var envVis = new AnimatSim.EnvironmentVisualization(background, env);
+var popVis = new AnimatSim.PopulationVisualization(foreground, pop);
 
-var brushIndex = 0;
-var brushes = [
+var envBrushIndex = 0;
+var envBrushes = [
   AnimatSim.tileBrushes.terrain,
   AnimatSim.tileBrushes.temperature,
   AnimatSim.tileBrushes.moisture,
-  AnimatSim.tileBrushes.vegetation
-  // AnimatSim.tileBrushes.animatDensity // commented out because there is no population yet
+  AnimatSim.tileBrushes.vegetation,
+  AnimatSim.tileBrushes.animatDensity
+];
+
+var popBrushIndex = 0;
+var popBrushes = [
+  AnimatSim.animatBrushes.energy,
+  AnimatSim.animatBrushes.swimming,
+  AnimatSim.animatBrushes.eating,
+  AnimatSim.animatBrushes.stomach,
+  AnimatSim.animatBrushes.moving,
+  AnimatSim.animatBrushes.vulnerability,
+  AnimatSim.animatBrushes.exporation,
+  AnimatSim.animatBrushes.avoidance
 ];
 
 window.onkeyup = function(arg)
 {
 	if ( arg.keyCode == 87 )
 	{
-	  brushIndex = _.incLoop(brushIndex, 0, brushes.length);
+	  envBrushIndex = _.incLoop(envBrushIndex, 0, envBrushes.length);
 	}
 	if ( arg.keyCode == 83 )
 	{
-	  brushIndex = _.decLoop(brushIndex, 0, brushes.length);
+	  envBrushIndex = _.decLoop(envBrushIndex, 0, envBrushes.length);
+	}
+	if ( arg.keyCode == 69 )
+	{
+	  popBrushIndex = _.incLoop(popBrushIndex, 0, popBrushes.length);
+	}
+	if ( arg.keyCode == 68 )
+	{
+	  popBrushIndex = _.decLoop(popBrushIndex, 0, popBrushes.length);
 	}
 };
 
 function update()
 {
 	env.step(pop);
-	vis.render(brushes[brushIndex]);
+  envVis.render(envBrushes[envBrushIndex]);
+	popVis.render(envBrushes[envBrushIndex]);
 	setTimeout(update, 1);
 }
 
