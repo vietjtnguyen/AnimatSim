@@ -7,7 +7,7 @@ var Animat = require('./animat');
  * and animat death.
  * @class
  */
-var Population = function(environment)
+function Population(environment)
 {
   var self = this;
 
@@ -20,7 +20,7 @@ var Population = function(environment)
 
   this.aliveAnimats = [];
   this.deadAnimats = [];
-};
+}
 
 /**
  */
@@ -37,6 +37,7 @@ Population.prototype.populate = function(numOfAnimats, animatFactory, replace)
   {
     throw Error('Population.populate() requires a callable function for the animatFactory argument.');
   }
+  // animatFactory = _.isFunction(animatFactory) ? animatFactory : function() { return new Animat(); };
   replace = _.isUndefined(replace) ? false : replace;
   if ( replace )
   {
