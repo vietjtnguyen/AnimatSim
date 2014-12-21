@@ -68,17 +68,17 @@ Animat.prototype.reset = function()
 
 
 
-Animat.prototype.oldReset = function()
+Animat.prototype.oldReset = function(environment)
 {
   var self = this;
   self.ticks = 0;
 
   //self.dir = _.random(0.0, Math.PI * 2.0);
-  //self.x = _.random(0.0, app.environment.size);
-  //self.y = _.random(0.0, app.environment.size);
+  //self.x = _.random(0.0, environment.size);
+  //self.y = _.random(0.0, environment.size);
   self.dir = _.random(-0.1, 0.1);
-  self.x = app.environment.size * (0.5 + _.random(-0.02, 0.02));
-  self.y = app.environment.size * (0.5 + _.random(-0.02, 0.02));
+  self.x = environment.size * (0.5 + _.random(-0.02, 0.02));
+  self.y = environment.size * (0.5 + _.random(-0.02, 0.02));
 
   self.xHistory = self.x;
   self.yHistory = self.y;
@@ -88,36 +88,36 @@ Animat.prototype.oldReset = function()
   self.vulnerability = 0.0;
 };
 
-Animat.prototype.update = function()
+Animat.prototype.step = function(environment)
 {
   var self = this;
 
   self.ticks += 1;
 
   // Gather local environmental information.
-  self.farDist = app.environment.tileSize * 4.0; // maybe later make self an output neuron?
+  self.farDist = environment.tileSize * 4.0; // maybe later make self an output neuron?
   self.farX = self.x + Math.cos(self.dir) * self.farDist;
   self.farY = self.y + Math.sin(self.dir) * self.farDist;
 
-  self.altitude = app.environment.getValue(self.x, self.y, 'terrain');
-  self.farAltitude = app.environment.getValue(self.farX, self.farY, 'terrain');
-  self.swimming = self.altitude < app.environment.waterLevel;
-  self.farWater = self.farAltitude < app.environment.waterLevel;
-  self.slope = util.rotateVec(app.environment.getGradient(self.x, self.y, 'terrain'), -self.dir);
+  self.altitude = environment.getValue(self.x, self.y, 'terrain');
+  self.farAltitude = environment.getValue(self.farX, self.farY, 'terrain');
+  self.swimming = self.altitude < environment.waterLevel;
+  self.farWater = self.farAltitude < environment.waterLevel;
+  self.slope = util.rotateVec(environment.getGradient(self.x, self.y, 'terrain'), -self.dir);
 
-  self.temperature = app.environment.getValue(self.x, self.y, 'temperature');
-  self.temperatureGradient = util.rotateVec(app.environment.getGradient(self.x, self.y, 'temperature'), -self.dir);
+  self.temperature = environment.getValue(self.x, self.y, 'temperature');
+  self.temperatureGradient = util.rotateVec(environment.getGradient(self.x, self.y, 'temperature'), -self.dir);
 
-  self.moisture = app.environment.getValue(self.x, self.y, 'moisture');
-  self.moistureGradient = util.rotateVec(app.environment.getGradient(self.x, self.y, 'moisture'), -self.dir);
+  self.moisture = environment.getValue(self.x, self.y, 'moisture');
+  self.moistureGradient = util.rotateVec(environment.getGradient(self.x, self.y, 'moisture'), -self.dir);
 
-  self.vegetation = app.environment.getValue(self.x, self.y, 'vegetation');
-  self.farVegetation = app.environment.getValue(self.farX, self.farY, 'vegetation');
-  self.vegetationGradient = util.rotateVec(app.environment.getGradient(self.x, self.y, 'vegetation'), -self.dir);
+  self.vegetation = environment.getValue(self.x, self.y, 'vegetation');
+  self.farVegetation = environment.getValue(self.farX, self.farY, 'vegetation');
+  self.vegetationGradient = util.rotateVec(environment.getGradient(self.x, self.y, 'vegetation'), -self.dir);
 
-  self.animatDensity = _.clamp(app.environment.getValue(self.x, self.y, 'animatDensity') - 0.6, 0.0, app.populationSize);
-  self.farAnimatDensity = _.clamp(app.environment.getValue(self.farX, self.farY, 'animatDensity') - 0.6, 0.0, app.populationSize);
-  self.animatDensityGradient = util.rotateVec(app.environment.getGradient(self.x, self.y, 'animatDensity'), -self.dir);
+  self.animatDensity = _.clamp(environment.getValue(self.x, self.y, 'animatDensity') - 0.6, 0.0, populationSize);
+  self.farAnimatDensity = _.clamp(environment.getValue(self.farX, self.farY, 'animatDensity') - 0.6, 0.0, populationSize);
+  self.animatDensityGradient = util.rotateVec(environment.getGradient(self.x, self.y, 'animatDensity'), -self.dir);
 
   // Update sensors in the brain. Zero direction in self coordinate system is
   // at positive X. This means left is -Y, right is +Y, forward is +X, and
@@ -258,8 +258,8 @@ Animat.prototype.update = function()
   self.y += Math.sin(self.dir) * self.moveAmount;
 
   // Keep the animat inside the environment.
-  self.x = Math.min(Math.max(self.x, 0), app.environment.size);
-  self.y = Math.min(Math.max(self.y, 0), app.environment.size);
+  self.x = Math.min(Math.max(self.x, 0), environment.size);
+  self.y = Math.min(Math.max(self.y, 0), environment.size);
 
   // Maintain history
   var historyPreference = 0.9;
@@ -269,7 +269,7 @@ Animat.prototype.update = function()
   // Eat.
   if( !self.swimming )
   {
-    app.environment.addValue(self.x, self.y, self.eatAmount * -0.5, 'vegetation');
+    environment.addValue(self.x, self.y, self.eatAmount * -0.5, 'vegetation');
     self.stomach = _.clamp(self.stomach + self.eatAmount * 0.1, 0.0, 1.0);
   }
 
