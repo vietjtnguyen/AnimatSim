@@ -70,7 +70,7 @@ function update()
 	env.step(pop);
 	pop.step();
   envVis.render(envBrushes[envBrushIndex]);
-	popVis.render(envBrushes[envBrushIndex]);
+	popVis.render(popBrushes[popBrushIndex]);
 	setTimeout(update, 1);
 }
 
