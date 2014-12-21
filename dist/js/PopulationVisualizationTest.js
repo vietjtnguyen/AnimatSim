@@ -6,7 +6,9 @@ env.terrain.normalizeValues();
 
 var pop = null;
 
-var container = d3.select('body').append('div')
+var container = d3.select('body')
+  .attr('style', 'align: center;')
+  .append('div')
 	.attr('style', 'width: ' + env.width + 'px ; height: ' + env.height + 'px ; margin: 0px; float: left;');
 var svg = container.append('svg')
   .attr('id', 'animat-sim-vis')
