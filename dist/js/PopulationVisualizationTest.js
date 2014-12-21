@@ -71,7 +71,7 @@ window.onkeyup = function(arg)
 function update()
 {
 	env.step(pop);
-	pop.step();
+	pop.step(env);
   envVis.render(envBrushes[envBrushIndex]);
 	popVis.render(popBrushes[popBrushIndex]);
 	setTimeout(update, 1);
