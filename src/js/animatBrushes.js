@@ -5,33 +5,45 @@ var colors = require('./colors');
 
 var exports = {};
 
-switch( settings.animatDisplayMode )
+exports.normal = function(animat)
 {
-case settings.AD_NORMAL:
-  representations.style('fill', function(d) { return animatEnergyColorScale(d.energy); });
-  break;
-case settings.AD_SWIMMING_ONLY:
-  representations.style('fill', function(d) { return d.swimming ? '#0000ff' : '#ffff00'; });
-  break;
-case settings.AD_EATING_ONLY:
-  representations.style('fill', function(d) { return redGreenColorScale(d.eatAmount / 0.2); });
-  break;
-case settings.AD_STOMACH_ONLY:
-  representations.style('fill', function(d) { return redGreenColorScale(d.stomach); });
-  break;
-case settings.AD_MOVING_ONLY:
-  representations.style('fill', function(d) { return redGreenColorScale(d.moveAmount / 1.5); });
-  break;
-case settings.AD_VULNERABILITY_ONLY:
-  representations.style('fill', function(d) { return greenRedColorScale(d.vulnerability / 0.01); });
-  break;
-case settings.AD_DISTFROMHIST_ONLY:
-  representations.style('fill', function(d) { return redGreenColorScale(d.distanceFromHistory / 10.0); });
-  break;
-case settings.AD_AVOIDANCE_ONLY:
-  representations.style('fill', function(d) { return avoidanceColorScale(d.avoidance); });
-  break;
-}
+  return colors.animatEnergyColorScale(animat.energy);
+};
+
+swimming_only = function(animat)
+{
+  return colors.animatSwimmingColorScale(animat.swimming);
+};
+
+eating_only = function(animat)
+{
+  return colors.redGreenColorScale(animat.eatAmount / 0.2);
+};
+
+stomach_only = function(animat)
+{
+  return colors.redGreenColorScale(animat.stomach);
+};
+
+moving_only = function(animat)
+{
+  return colors.redGreenColorScale(animat.moveAmount / 1.5);
+};
+
+vulnerability_only = function(animat)
+{
+  return colors.greenRedColorScale(animat.vulnerability / 0.01);
+};
+
+distfromhist_only = function(animat)
+{
+  return colors.redGreenColorScale(animat.distanceFromHistory / 10.0);
+};
+
+avoidance_only = function(animat)
+{
+  return colors.avoidanceColorScale(animat.avoidance);
+};
 
 module.exports = exports;
 

@@ -68,6 +68,11 @@ module.exports = {
 		.domain([0.0, 20.0, 40.0, 60.0, 100.0])
 		.range(['#DC7772', '#FACB7B', '#FFDD55', '#B3FF80', '#1763E0']),
 
+  animatSwimmingColorScale: function(isSwimming)
+  {
+    return isSwimming ? '#0000ff' : '#ffff00';
+  },
+
 	avoidanceColorScale: d3.scale.linear()
 		.domain([-0.000030, 0.0, 0.000085])
 		.range(['#FF0000', '#FFFF80', '#00FF00'])
