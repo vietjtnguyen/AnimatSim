@@ -33,23 +33,15 @@ Population.prototype.populateRandom = function(numOfAnimats)
 
 /**
  */
-Population.prototype.update = function()
+Population.prototype.step = function(environment)
 {
   var i;
-
   for( i = 0; i < this.aliveAnimats.length; i += 1 )
   {
     var animat = this.aliveAnimats[i];
-
-    animat.update();
-
+    animat.step(environment);
     if( animat.energy <= 0.0 )
     {
-      if( !app.evaluationMode )
-      {
-        log('Animat #'+animat.index+' died at tick '+app.tick+', '+(this.aliveAnimats.length-1)+' remaining');
-      }
-
       this.aliveAnimats.splice(i, 1);
       this.deadAnimats.push(animat);
       i -= 1;
