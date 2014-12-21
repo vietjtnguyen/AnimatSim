@@ -41,4 +41,15 @@ exports.rotateVec = function(xy, ang)
   ];
 };
 
+exports.cssTransformMatrix = function(x, y, angRad)
+{
+    return 'matrix(' +
+      (+Math.cos(angRad)) + ' ' +
+      (+Math.sin(angRad)) + ' ' +
+      (-Math.sin(angRad)) + ' ' +
+      (+Math.cos(angRad)) + ' ' +
+      x + ' ' +
+      y + ')';
+};
+
 module.exports = exports;

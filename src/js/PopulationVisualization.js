@@ -1,3 +1,5 @@
+var geom = require('.geom');
+
 function PopulationVisualization(d3SvgGroup, population)
 {
   var self = this;
@@ -26,9 +28,9 @@ Population.prototype.render = function(brush)
   representations.exit().remove();
 
   representations
-    .attr('transform', function(d)
+    .attr('transform', function(animat)
     {
-      return 'matrix('+Math.cos(d.dir)+' '+Math.sin(d.dir)+' '+(-Math.sin(d.dir))+' '+Math.cos(d.dir)+' '+d.x+' '+d.y+')';
+      return geom.cssTransformMatrix(animat.x, animat.y, animat.dir);
     })
     .style('fill', brush);
 };
