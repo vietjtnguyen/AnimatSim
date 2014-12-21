@@ -13,14 +13,15 @@ function PopulationVisualization(d3SvgGroup, population)
   self.population = population;
 }
 
-Population.prototype.render = function(root, brush)
+Population.prototype.render = function(brush)
 {
+  var self = this;
+
   brush = brush ? brush : animatBrushes.energy;
 
-  var representations = root.selectAll('.animat').data(this.aliveAnimats);
+  var representations = self.d3SvgGroup.selectAll('path').data(self.population.aliveAnimats);
 
   representations.enter().append('path')
-    .classed('animat', true)
     .attr('d', 'M 4 0 L -4 3 L -4 -3 L 4 0');
   representations.exit().remove();
 
