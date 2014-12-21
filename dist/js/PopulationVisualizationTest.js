@@ -4,7 +4,7 @@ env.terrain.iterateVertices(function(value, arr, x, y) {
 });
 env.terrain.normalizeValues();
 
-var pop = new AnimatSim.Population();
+var pop = new AnimatSim.Population(env);
 pop.initialize(400, function() {
   return new Animat();
 });
