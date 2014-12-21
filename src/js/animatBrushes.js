@@ -1,6 +1,3 @@
-var d3 = require('d3');
-
-var _ = require('./util');
 var colors = require('./colors');
 
 var exports = {};
