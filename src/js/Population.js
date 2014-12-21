@@ -24,7 +24,7 @@ Population.prototype.add = function(animat)
  */
 Population.prototype.populateRandom = function(numOfAnimats)
 {
-  for( var i = 0; i < numOfAnimats; i+= 1 )
+  for ( var i = 0; i < numOfAnimats; i+= 1 )
   {
     this.add(new Animat(this.animatCounter));
     this.animatCounter += 1;
@@ -36,7 +36,7 @@ Population.prototype.populateRandom = function(numOfAnimats)
 Population.prototype.step = function(environment)
 {
   var i;
-  for( i = 0; i < this.aliveAnimats.length; i += 1 )
+  for ( i = 0; i < this.aliveAnimats.length; i += 1 )
   {
     var animat = this.aliveAnimats[i];
     animat.step(environment);
@@ -53,7 +53,7 @@ Population.prototype.step = function(environment)
  */
 Population.prototype.killAll = function() {
   var self = this;
-  while( self.aliveAnimats.length > 0 )
+  while ( self.aliveAnimats.length > 0 )
   {
     self.deadAnimats.push(self.aliveAnimats.pop());
   }
