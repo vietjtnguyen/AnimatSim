@@ -70,7 +70,8 @@ EnvironmentVisualization.prototype.render = function(brush) {
   });
 
   // Create the D3 selection.
-  var tilesD3Selection = self.d3SvgGroup.selectAll('rect').data(self.tiles);
+  var tilesD3Selection = self.d3SvgGroup.selectAll('rect')
+    .data(self.tiles);
 
   // Add any missing tiles.
   // TODO: Pre-initialize this and just cache the resulting selection.

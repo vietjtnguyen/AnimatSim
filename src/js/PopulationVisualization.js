@@ -21,7 +21,8 @@ Population.prototype.render = function(brush)
 
   brush = brush ? brush : animatBrushes.energy;
 
-  var representations = self.d3SvgGroup.selectAll('path').data(self.population.aliveAnimats);
+  var representations = self.d3SvgGroup.selectAll('path')
+    .data(self.population.aliveAnimats);
 
   representations.enter().append('path')
     .attr('d', 'M 4 0 L -4 3 L -4 -3 L 4 0');
