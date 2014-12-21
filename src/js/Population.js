@@ -33,7 +33,10 @@ Population.prototype.add = function(animat)
  */
 Population.prototype.populate = function(numOfAnimats, animatFactory, replace)
 {
-  animatFactory = _.isFunction(animatFactory) ? animatFactory : function() { return new Animat(); };
+  if ( !_.isFunction(animatFactory) )
+  {
+    throw Error('Population.populate() requires a callable function for the animatFactory argument.');
+  }
   replace = _.isUndefined(replace) ? false : replace;
   if ( replace )
   {
