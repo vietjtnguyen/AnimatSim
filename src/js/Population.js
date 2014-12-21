@@ -1,3 +1,5 @@
+var _ = require('./util');
+
 var Animat = require('./animat');
 
 /**
@@ -16,7 +18,6 @@ var Population = function(environment)
   }
   self.environment = environment;
 
-  this.animatCounter = 0;
   this.aliveAnimats = [];
   this.deadAnimats = [];
 };
@@ -30,12 +31,17 @@ Population.prototype.add = function(animat)
 
 /**
  */
-Population.prototype.populateRandom = function(numOfAnimats)
+Population.prototype.populate = function(numOfAnimats, animatFactory, replace)
 {
-  for ( var i = 0; i < numOfAnimats; i+= 1 )
+  animatFactory = animatFactory || function() { return new Animat(); };
+  replace = _.isUndefined(replace) ? false : replace;
+  if ( replace )
   {
-    this.add(new Animat(this.animatCounter));
-    this.animatCounter += 1;
+    this.aliveAnimats = _.times(numOfAnimats, animatFactory);
+  }
+  else
+  {
+    this.aliveAnimats = this.aliveAnimats.concat(_.times(numOfAnimats, animatFactory));
   }
 };
 
