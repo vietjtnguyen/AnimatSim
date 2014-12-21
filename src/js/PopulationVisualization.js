@@ -10,7 +10,7 @@ function PopulationVisualization(d3SvgGroup, population)
   // Remember associated population.
   if ( !population )
   {
-    throw Error('PopulationVisualization requires and population on construction.');
+    throw Error('PopulationVisualization requires an population on construction.');
   }
   self.population = population;
 }

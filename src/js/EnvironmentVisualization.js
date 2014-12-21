@@ -33,7 +33,7 @@ function EnvironmentVisualization(d3SvgGroup, environment, population)
   // Remember associated environment.
   if ( !environment )
   {
-    throw Error('EnvironmentVisualization requires and environment on construction.');
+    throw Error('EnvironmentVisualization requires an environment on construction.');
   }
   self.environment = environment;
 

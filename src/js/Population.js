@@ -5,8 +5,17 @@ var Animat = require('./animat');
  * and animat death.
  * @class
  */
-var Population = function()
+var Population = function(environment)
 {
+  var self = this;
+
+  // Remember associated environment.
+  if ( !environment )
+  {
+    throw Error('Population requires an environment on construction.');
+  }
+  self.environment = environment;
+
   this.animatCounter = 0;
   this.aliveAnimats = [];
   this.deadAnimats = [];
