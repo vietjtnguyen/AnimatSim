@@ -1,9 +1,8 @@
 var Animat = require('./animat');
 
 /**
- * @classdesc Represents a population of animats and handles updating the
- * animats, killing them, populating them, handling generational changes, and
- * rendering them.
+ * @classdesc Represents a population of animats, handling aggregate updates
+ * and animat death.
  * @class
  */
 var Population = function()
