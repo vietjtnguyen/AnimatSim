@@ -1,5 +1,4 @@
 function PopulationVisualization() {
-  this.animatDisplayMode = PopulationVisualization.AD_NORMAL;
 }
 
 Population.prototype.render = function(root, brush)
