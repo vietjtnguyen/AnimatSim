@@ -1,16 +1,22 @@
 var _ = require('./util');
 
-var BaseAnimat = require('./BaseAnimat');
-var Brain = require('./Brain');
+/**
+ * @private
+ */
+function makeAnimatId()
+{
+  makeAnimatId.globalAnimatCounter += 1;
+  return globalAnimatCounter;
+}
+makeAnimatId.globalAnimatCounter = -1;
 
 /**
  * @classdesc
- * @arg {Object} environment
- * @arg {Object} settings Specifies settings to override in animat (see {@link Animat.defaultSettings}). Note that these settings are reapplied (also re-evaluated if the specific values are functions) when the {@link Animat#reset} function is called.
+ * @arg {Object} settings
  * @arg [{function}] idFunc
  * @class
  */
-function Animat(settings, idFunc)
+function BaseAnimat(settings, idFunc)
 {
   var self = this;
 
@@ -26,9 +32,6 @@ function Animat(settings, idFunc)
   self.id = _.isFunction(idFunc) ? idFunc() : makeAnimatId();
 }
 
-// Set up prototype chain.
-Animat.prototype = new BaseAnimat();
-Animat.base = BaseAnimat;
 
 /**
  * @static
@@ -36,8 +39,7 @@ Animat.base = BaseAnimat;
  */
 Animat.defaultSettings =
   {
-    customReset: null,
-    brain: Brain.markIIb
+    customReset: null
   };
 
 /**
@@ -293,4 +295,5 @@ Animat.prototype.step = function(environment)
 };
 
 module.exports = Animat;
+
 
