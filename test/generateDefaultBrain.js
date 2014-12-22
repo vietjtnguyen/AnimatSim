@@ -17,6 +17,10 @@ describe('The generateDefaultBrain module', function() {
       var brain = generateDefaultBrain();
       expect(brain).to.be.instanceof(Brain);
     });
+    it('should generate a Brain object with 63 neurons', function() {
+      var brain = generateDefaultBrain();
+      expect(brain.neurons.length).to.equal(63);
+    });
   });
 });
 
