@@ -100,4 +100,3 @@ BaseAnimat.prototype.step = function(environment)
 
 module.exports = BaseAnimat;
 
-
