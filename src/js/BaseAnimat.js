@@ -6,7 +6,7 @@ var _ = require('./util');
 function makeAnimatId()
 {
   makeAnimatId.globalAnimatCounter += 1;
-  return globalAnimatCounter;
+  return makeAnimatId.globalAnimatCounter;
 }
 makeAnimatId.globalAnimatCounter = -1;
 
