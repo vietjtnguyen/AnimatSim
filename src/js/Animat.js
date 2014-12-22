@@ -60,7 +60,7 @@ Animat.validSettingKeys = _.keys(Animat.defaultSettings);
 Animat.prototype.reset = function()
 {
   var self = this;
-  Animat.base.reset.call(self);
+  Animat.base.prototype.reset.call(self);
 
   self.xHistory = self.x;
   self.yHistory = self.y;
@@ -74,7 +74,7 @@ Animat.prototype.reset = function()
 Animat.prototype.defaultReset = function(environment)
 {
   var self = this;
-  Animat.base.defaultReset.call(self, environment);
+  Animat.base.prototype.defaultReset.call(self, environment);
 
   self.energy = 100.0;
   self.stomach = 1.0;
@@ -88,7 +88,7 @@ Animat.prototype.defaultReset = function(environment)
 Animat.prototype.step = function(environment)
 {
   var self = this;
-  Animat.base.step.call(self, environment);
+  Animat.base.prototype.step.call(self, environment);
 
   // Gather local environmental information.
   self.farDist = environment.tileSize * 4.0; // maybe later make self an output neuron?
