@@ -10,41 +10,6 @@ var Brain = function()
 {
   var self = this;
   self.neurons = [];
-  self.nonInputNeurons = [];
-};
-
-/**
- */
-Brain.prototype.addInputNeuron = function(neuron)
-{
-  var self = this;
-  return self.inputNeurons.push(neuron);
-};
-
-/**
- */
-Brain.prototype.addNonInputNeuron = function(neuron)
-{
-  var self = this;
-  return self.nonInputNeurons.push(neuron);
-};
-
-Brain.prototype.fullyConnect = function()
-{
-  var self = this;
-  for( i = 0; i < brain.nonInputNeurons.length; i += 1 )
-  {
-    var nonInputNeuron = brain.nonInputNeurons[i];
-    nonInputNeuron.output = Math.random(); // random seed, not sure how important this is
-    for( var j = 0; j < allNeurons.length; j += 1 )
-    {
-      var otherNeuron = allNeurons[j];
-      if( nonInputNeuron != otherNeuron )
-      {
-        nonInputNeuron.connect(otherNeuron, Math.random() * 1.0);
-      }
-    }
-  }
 };
 
 /**
