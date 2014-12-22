@@ -29,12 +29,21 @@ describe('The Neuron module', function() {
       expect(neuron.output).to.equal(0.0);
     });
     it('should not reset input when processing inputs with no connections', function() {
-      var neuron = new Neuron(1.0, 1.0, 1.0, 0.0);
+      var neuron = new Neuron(1.0, 0.5, 1.0, 0.0);
       expect(neuron.connections).to.be.empty();
       neuron.setInput(1.234);
       expect(neuron.totalInput).to.equal(1.234);
       neuron.processInput();
       expect(neuron.totalInput).to.equal(1.234);
+    });
+    it('should be connectable to other neurons', function() {
+      var neuronA = new Neuron(1.0, 0.5, 1.0, 0.0);
+      var neuronB = new Neuron(1.0, 0.5, 1.0, 0.0);
+      var neuronC = new Neuron(1.0, 0.5, 1.0, 0.0);
+      expect(neuronA.connections).to.be.empty();
+      neuronA.connect(neuronB, 1.0);
+      neuronA.connect(neuronC, 1.0);
+      expect(neuronA.connections.length).to.equal(2);
     });
   });
 });
