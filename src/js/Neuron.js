@@ -28,9 +28,8 @@ function relu(x) {
  * @classdesc
  * @class
  */
-var Neuron = function(index, sign, threshold, domainScale, stochasticity)
+var Neuron = function(sign, threshold, domainScale, stochasticity)
 {
-  this.index = index;
   this.sign = sign;
   this.threshold = threshold;
   this.domainScale = domainScale;
