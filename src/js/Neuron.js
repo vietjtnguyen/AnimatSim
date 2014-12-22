@@ -33,18 +33,20 @@ function relu(x) {
  */
 var Neuron = function(sign, threshold, domainScale, stochasticity)
 {
-  this.sign = sign;
-  this.threshold = threshold;
-  this.domainScale = domainScale;
-  this.stochasticity = stochasticity;
-  this.connections = [];
+  var self = this;
+  self.sign = sign;
+  self.threshold = threshold;
+  self.domainScale = domainScale;
+  self.stochasticity = stochasticity;
+  self.connections = [];
 };
 
 /**
  */
 Neuron.prototype.connect = function(neuron, strength)
 {
-  return this.connections.push({
+  var self = this;
+  return self.connections.push({
     neuron: neuron,
     strength: strength,
   });
@@ -55,11 +57,18 @@ Neuron.prototype.connect = function(neuron, strength)
  */
 Neuron.prototype.processInput = function()
 {
-  this.totalInput = 0.0;
-  for( var i = 0; i < this.connections.length; i += 1 )
+  var self = this;
+
+  if ( self.connections.length == 0 )
   {
-    var connection = this.connections[i];
-    this.totalInput += connection.neuron.output * normalizedSquash(connection.strength, 6.0);
+    return;
+  }
+
+  self.totalInput = 0.0;
+  for( var i = 0; i < self.connections.length; i += 1 )
+  {
+    var connection = self.connections[i];
+    self.totalInput += connection.neuron.output * normalizedSquash(connection.strength, 6.0);
   }
 };
 
@@ -68,7 +77,8 @@ Neuron.prototype.processInput = function()
  */
 Neuron.prototype.setInput = function(value)
 {
-  this.totalInput = value;
+  var self = this;
+  self.totalInput = value;
 };
 
 
@@ -76,13 +86,14 @@ Neuron.prototype.setInput = function(value)
  */
 Neuron.prototype.fire = function()
 {
-  if( sigmoid(this.totalInput * this.domainScale) >= this.threshold )
+  var self = this;
+  if( sigmoid(self.totalInput * self.domainScale) >= self.threshold )
   {
-    this.output = this.sign * ((1.0 - this.stochasticity) + Math.random() * this.stochasticity);
+    self.output = self.sign * ((1.0 - self.stochasticity) + Math.random() * self.stochasticity);
   }
   else
   {
-    this.output = 0.0;
+    self.output = 0.0;
   }
 };
 
@@ -92,10 +103,11 @@ Neuron.prototype.fire = function()
  */
 Neuron.prototype.toGene = function()
 {
-  var gene = [this.threshold, this.domainScale, this.stochasticity];
-  for( var i = 0; i < this.connections.length; i += 1 )
+  var self = this;
+  var gene = [self.threshold, self.domainScale, self.stochasticity];
+  for( var i = 0; i < self.connections.length; i += 1 )
   {
-    gene.push(this.connections[i].strength);
+    gene.push(self.connections[i].strength);
   }
   return gene;
 };
@@ -104,12 +116,13 @@ Neuron.prototype.toGene = function()
  */
 Neuron.prototype.fromGene = function(gene)
 {
-  this.threshold = gene[0];
-  this.domainScale = gene[1];
-  this.stochasticity = gene[2];
-  for( var i = 0; i < this.connections.length; i += 1 )
+  var self = this;
+  self.threshold = gene[0];
+  self.domainScale = gene[1];
+  self.stochasticity = gene[2];
+  for( var i = 0; i < self.connections.length; i += 1 )
   {
-    this.connections[i].strength = gene[3 + i];
+    self.connections[i].strength = gene[3 + i];
   }
 };
 
