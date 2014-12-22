@@ -25,9 +25,6 @@ function BaseAnimat(settings, idFunc)
 
   self.reset();
 
-  // Create/assign brain.
-  self.brain = _.isFunction(brain) ? brain() : brain;
-
   // Assign a unique ID to the animat.
   self.id = _.isFunction(idFunc) ? idFunc() : makeAnimatId();
 }

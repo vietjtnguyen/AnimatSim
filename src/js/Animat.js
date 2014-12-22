@@ -13,17 +13,15 @@ var Brain = require('./Brain');
 function Animat(settings, idFunc)
 {
   var self = this;
+  
+  // Call base constructor.
+  Animat.base.call(self, settings);
 
   // Apply default settings and specified settings.
 	_.assign(self, Animat.defaultSettings, _.pick(settings, Animat.validSettingKeys));
 
-  self.reset();
-
   // Create/assign brain.
   self.brain = _.isFunction(brain) ? brain() : brain;
-
-  // Assign a unique ID to the animat.
-  self.id = _.isFunction(idFunc) ? idFunc() : makeAnimatId();
 }
 
 // Set up prototype chain.
