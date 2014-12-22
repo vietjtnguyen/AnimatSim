@@ -44,6 +44,7 @@ Population.prototype.populate = function(numOfAnimats, animatFactory, replace)
 
 Population.prototype.getTotalSize = function()
 {
+  var self = this;
   return self.aliveAnimats.length + self.deadAnimats.length;
 };
 
@@ -78,7 +79,7 @@ Population.prototype.step = function(environment)
 {
   var self = this;
   self.aliveAnimats.forEach(function(animat, index) {
-    animat.step(environment);
+    animat.step(environment, self);
     if ( animat.energy <= 0.0 )
     {
       self.aliveAnimats.splice(index, 1);
