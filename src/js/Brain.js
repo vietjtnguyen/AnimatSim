@@ -17,18 +17,21 @@ var Brain = function()
  */
 Brain.prototype.addInputNeuron = function(neuron)
 {
-  return this.inputNeurons.push(neuron);
+  var self = this;
+  return self.inputNeurons.push(neuron);
 };
 
 /**
  */
 Brain.prototype.addNonInputNeuron = function(neuron)
 {
-  return this.nonInputNeurons.push(neuron);
+  var self = this;
+  return self.nonInputNeurons.push(neuron);
 };
 
 Brain.prototype.fullyConnect = function()
 {
+  var self = this;
   for( i = 0; i < brain.nonInputNeurons.length; i += 1 )
   {
     var nonInputNeuron = brain.nonInputNeurons[i];
