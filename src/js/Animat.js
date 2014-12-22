@@ -19,7 +19,7 @@ function Animat(settings)
 
   // Apply default settings and specified settings.
 	_.assign(self, Animat.defaultSettings, _.pick(settings, Animat.validSettingKeys));
-	var ignoredKeys = _.without(_.keys(settings), Animat.validSettingsKeys);
+	var ignoredKeys = _.without(_.keys(settings), Animat.validSettingKeys);
 	if ( ignoredKeys.length > 0 )
 	{
 	  console.log('WARN: The following settings for Animat construction were ignored: ' + ignoredKeys.join(', '));

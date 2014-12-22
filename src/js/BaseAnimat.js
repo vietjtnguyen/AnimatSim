@@ -22,11 +22,9 @@ function BaseAnimat(settings)
 
   // Apply default settings and specified settings.
 	_.assign(self, BaseAnimat.defaultSettings, _.pick(settings, BaseAnimat.validSettingKeys));
-	var ignoredKeys = _.difference(_.keys(settings), BaseAnimat.validSettingsKeys);
+	var ignoredKeys = _.difference(_.keys(settings), BaseAnimat.validSettingKeys);
 	if ( ignoredKeys.length > 0 )
 	{
-	  console.log(_.keys(settings));
-	  console.log(BaseAnimat.validSettingsKeys);
 	  console.log('WARN: The following settings for BaseAnimat construction were ignored: ' + ignoredKeys.join(', '));
 	}
 
