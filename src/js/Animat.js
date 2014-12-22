@@ -49,19 +49,19 @@ Animat.defaultSettings =
 Animat.validSettingKeys = _.keys(Animat.defaultSettings);
 
 /**
- * Apply default reset and then allow custom reset to override changes. After
- * that, run pre-simulation initialization. This is not meant to be called
- * explicitly.
+ * Apply default reset and then allow custom reset to override changes.
  */
-Animat.prototype.reset = function()
+Animat.prototype.init = function()
 {
   var self = this;
+  Animat.base.init.call(self)
   self.defaultReset();
   if ( _.isFunction(self.customReset) )
   {
     self.customReset();
   }
-  self.init();
+  self.xHistory = self.x;
+  self.yHistory = self.y;
 };
 
 /**
@@ -76,18 +76,6 @@ Animat.prototype.defaultReset = function(environment)
   self.energy = 100.0;
   self.stomach = 1.0;
   self.vulnerability = 0.0;
-};
-
-/**
- * Perform pre-simulation initialization. Right now this simply consists of
- * initializing the position history.
- */
-Animat.prototype.init = function()
-{
-  var self = this;
-  Animat.base.init.call(self)
-  self.xHistory = self.x;
-  self.yHistory = self.y;
 };
 
 /**
