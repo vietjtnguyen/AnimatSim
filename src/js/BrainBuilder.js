@@ -13,6 +13,7 @@ function BrainBuilder()
 
 BrainBuilder.prototype.addNamedNeurons = function(inputNames, group, neuronFactory)
 {
+  var self = this;
   inputNames.forEach(function(name) {
     var neuron = neuronFactory();
     self.neurons.push(neuron);
@@ -27,6 +28,7 @@ BrainBuilder.prototype.addNamedNeurons = function(inputNames, group, neuronFacto
 
 BrainBuilder.prototype.addUnnamedNeurons = function(numToAdd, group, neuronFactory)
 {
+  var self = this;
   var i;
   var neuron;
   for ( i = 0; i < numToAdd; i += 1)
@@ -42,8 +44,17 @@ BrainBuilder.prototype.addUnnamedNeurons = function(numToAdd, group, neuronFacto
   }
 };
 
+/**
+ * Connects the neurons added thus far in a complete manner (i.e. complete
+ * graph) meaning all neurons are connected to all neurons (i.e. all neurons
+ * use all other neurons as input). However, any groups specified in
+ * `groupsToNotConnect` will not create any connections (i.e. have no inputs)
+ * but will still act as inputs for other neurons. This behavior exists because
+ * input neurons (e.g. sensors, internal state) are *set* by animats directly.
+ */
 BrainBuilder.prototype.connectComplete = function(groupsToNotConnect)
 {
+  var self = this;
   groupsToNotConnect = groupsToNotConnect || [];
   var groupNames = _.difference(_.keys(self.groups), groupsToNotConnect);
   groupNames.forEach(function(groupName) {
@@ -60,6 +71,10 @@ BrainBuilder.prototype.connectComplete = function(groupsToNotConnect)
 
 BrainBuilder.prototype.toBrain = function()
 {
+  var self = this;
+  var brain = new Brain();
+  brain.neurons = _.copy(self.neurons);
+  _.forEach(
 };
 
 module.exports = BrainBuilder;
