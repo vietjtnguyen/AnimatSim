@@ -16,7 +16,7 @@ pop.initialize(400, function() {
       self.x = env.width * (0.5 + _.random(-0.02, 0.02));
       self.y = env.width * (0.5 + _.random(-0.02, 0.02));
     },
-    brain: AnimatSim.Brain.markIIb
+    brain: AnimatSim.generateDefaultBrain
   });
 });
 
