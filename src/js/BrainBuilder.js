@@ -62,7 +62,7 @@ BrainBuilder.prototype.connectComplete = function(groupsToNotConnect)
       self.neurons.forEach(function(inNeuron) {
         if ( neuron !== inNeuron )
         {
-          neuron.connect(inNeuron, _.random());
+          neuron.connect(inNeuron, _.random(0.5, 1.5));
         }
       });
     });

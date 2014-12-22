@@ -29,7 +29,7 @@ Brain.prototype.randomizeNeuronOutputs = function()
 {
   var self = this;
   self.neurons.forEach(function(neuron) {
-    neuron.output = _.random();
+    neuron.output = _.random(0.0, 1.0, true);
   });
 };
 
