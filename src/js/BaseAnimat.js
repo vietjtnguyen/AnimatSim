@@ -28,14 +28,14 @@ function BaseAnimat(settings)
 	  console.log('WARN: The following settings for BaseAnimat construction were ignored: ' + ignoredKeys.join(', '));
 	}
 
-  self.init();
-
   // Assign a unique ID to the animat.
   if ( !_.isFunction(self.generateId) )
   {
     throw Error('Animat ID generator must be a function that generates a unique ID.');
   }
   self.id = self.generateId();
+
+  self.reset();
 }
 
 
@@ -65,7 +65,7 @@ BaseAnimat.validSettingKeys = _.keys(BaseAnimat.defaultSettings);
 /**
  * Apply default reset and then allow custom reset to override changes.
  */
-BaseAnimat.prototype.init = function()
+BaseAnimat.prototype.reset = function()
 {
   var self = this;
   self.defaultReset();

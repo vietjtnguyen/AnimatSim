@@ -27,6 +27,8 @@ function Animat(settings)
 
   // Create/assign brain.
   self.brain = _.isFunction(brain) ? brain() : brain;
+
+  self.reset();
 }
 
 // Set up prototype chain.
@@ -54,10 +56,10 @@ Animat.validSettingKeys = _.keys(Animat.defaultSettings);
 /**
  * Apply default reset and then allow custom reset to override changes.
  */
-Animat.prototype.init = function()
+Animat.prototype.reset = function()
 {
   var self = this;
-  Animat.base.init.call(self);
+  Animat.base.reset.call(self);
 
   self.xHistory = self.x;
   self.yHistory = self.y;
