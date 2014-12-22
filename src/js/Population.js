@@ -1,6 +1,6 @@
 var _ = require('./util');
 
-var Animat = require('./animat');
+var Animat = require('./Animat');
 
 /**
  * @classdesc Represents a population of animats, handling aggregate updates
