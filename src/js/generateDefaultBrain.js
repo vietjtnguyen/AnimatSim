@@ -53,7 +53,7 @@ module.exports = function()
   ];
   group = 'sensors';
   neuronFactory = function() { return createStandardNeuron(1.0); };
-  brainBuilder.addNamedNeurons(inputNames, group, neuronFactory);
+  brainBuilder.addNamedNeurons(sensorNames, group, neuronFactory);
 
   // Internal state
   var internalStateNames = [
@@ -67,7 +67,7 @@ module.exports = function()
   ];
   group = 'internalState';
   neuronFactory = function() { return createStandardNeuron(1.0); };
-  brainBuilder.addNamedNeurons(inputNames, group, neuronFactory);
+  brainBuilder.addNamedNeurons(internalStateNames, group, neuronFactory);
   
   // Create output neurons.
   var outputNames = [
@@ -81,7 +81,7 @@ module.exports = function()
   ];
   group = 'output';
   neuronFactory = function() { return createStandardNeuron(1.0); };
-  brainBuilder.addNamedNeurons(inputNames, group, neuronFactory);
+  brainBuilder.addNamedNeurons(outputNames, group, neuronFactory);
 
   // Create excitatory neurons.
   group = 'excitatory';

@@ -8,7 +8,7 @@ var _ = require('lodash');
 describe('The generateDefaultBrain module', function() {
   var generateDefaultBrain = require('../src/js/generateDefaultBrain');
   it('should contain a function', function() {
-    expect(_.isFunction(generateDefaultBrain)).to.be.true;
+    expect(_.isFunction(generateDefaultBrain)).to.be.true();
   });
 
   describe('The generateDefaultBrain function', function() {
