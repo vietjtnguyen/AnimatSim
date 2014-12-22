@@ -45,6 +45,28 @@ describe('The Neuron module', function() {
       neuronA.connect(neuronC, 1.0);
       expect(neuronA.connections.length).to.equal(2);
     });
+    it('should respect connection strengths', function() {
+      var neuronA = new Neuron(1.0, 0.5, 1.0, 0.0);
+      var neuronB = new Neuron(1.0, 0.5, 1.0, 0.0);
+      var neuronC = new Neuron(1.0, 0.5, 1.0, 0.0);
+      neuronA.connect(neuronB, 1.0);
+      neuronA.connect(neuronC, 0.0);
+      neuronB.setInput(1.0);
+      neuronC.setInput(1.0);
+      neuronA.processInput();
+      neuronA.fire();
+      expect(neuronA.output).to.be.greaterThan(0.0);
+      neuronB.setInput(1.0);
+      neuronC.setInput(0.0);
+      neuronA.processInput();
+      neuronA.fire();
+      expect(neuronA.output).to.be.greaterThan(0.0);
+      neuronB.setInput(0.0);
+      neuronC.setInput(1.0);
+      neuronA.processInput();
+      neuronA.fire();
+      expect(neuronA.output).to.equal(0.0);
+    });
   });
 });
 
