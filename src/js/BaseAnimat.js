@@ -34,8 +34,6 @@ function BaseAnimat(settings)
     throw Error('Animat ID generator must be a function that generates a unique ID.');
   }
   self.id = self.generateId();
-
-  self.reset();
 }
 
 
