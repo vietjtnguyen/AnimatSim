@@ -8,7 +8,7 @@ env.terrain.normalizeValues();
 
 var pop = new AnimatSim.Population();
 pop.populate(400, function() {
-  return new Animat({
+  return new AnimatSim.Animat({
     customReset: function()
     {
       var self = this;

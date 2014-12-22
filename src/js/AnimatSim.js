@@ -15,6 +15,7 @@ namespace.Neuron = require('./Neuron');
 namespace.generateDefaultBrain = require('./generateDefaultBrain');
 namespace.Population = require('./Population');
 namespace.PopulationVisualization = require('./PopulationVisualization');
+namespace.animatBrushes = require('./animatBrushes');
 namespace.Environment = require('./Environment');
 namespace.EnvironmentVisualization = require('./EnvironmentVisualization');
 namespace.tileBrushes = require('./tileBrushes');
