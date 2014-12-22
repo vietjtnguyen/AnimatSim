@@ -84,6 +84,8 @@ Animat.prototype.defaultReset = function(environment)
  */
 Animat.prototype.init = function()
 {
+  var self = this;
+  Animat.base.init.call(self)
   self.xHistory = self.x;
   self.yHistory = self.y;
 };
@@ -95,8 +97,7 @@ Animat.prototype.init = function()
 Animat.prototype.step = function(environment)
 {
   var self = this;
-
-  self.ticks += 1;
+  Animat.base.step.call(self, environment);
 
   // Gather local environmental information.
   self.farDist = environment.tileSize * 4.0; // maybe later make self an output neuron?
