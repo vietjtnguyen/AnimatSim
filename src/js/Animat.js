@@ -21,7 +21,7 @@ function Animat(settings)
 	var ignoredKeys = _.without(_.keys(settings), Animat.validSettingsKeys);
 	if ( ignoredKeys.length > 0 )
 	{
-	  console.log("WARN: The following settings for Animat construction were ignored: " + ignoredKeys.toString());
+	  console.log('WARN: The following settings for Animat construction were ignored: ' + ignoredKeys.join(', '));
 	}
 
   // Create/assign brain.

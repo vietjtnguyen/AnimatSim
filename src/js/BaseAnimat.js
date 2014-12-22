@@ -25,7 +25,7 @@ function BaseAnimat(settings)
 	var ignoredKeys = _.without(_.keys(settings), BaseAnimat.validSettingsKeys);
 	if ( ignoredKeys.length > 0 )
 	{
-	  console.log("WARN: The following settings for BaseAnimat construction were ignored: " + ignoredKeys.toString());
+	  console.log('WARN: The following settings for BaseAnimat construction were ignored: ' + ignoredKeys.join(', '));
 	}
 
   self.init();
