@@ -26,7 +26,7 @@ function Animat(settings)
 	}
 
   // Create/assign brain.
-  self.brain = _.isFunction(brain) ? brain() : brain;
+  self.brain = _.isFunction(self.brain) ? self.brain() : self.brain;
 }
 
 // Set up prototype chain.
