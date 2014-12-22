@@ -64,18 +64,15 @@ Population.prototype.reset = function()
  */
 Population.prototype.step = function(environment)
 {
-  var i;
-  for ( i = 0; i < this.aliveAnimats.length; i += 1 )
-  {
-    var animat = this.aliveAnimats[i];
+  var self = this;
+  self.aliveAnimats.forEach(function(animat, index) {
     animat.step(environment);
-    if( animat.energy <= 0.0 )
+    if ( animat.energy <= 0.0 )
     {
-      this.aliveAnimats.splice(i, 1);
-      this.deadAnimats.push(animat);
-      i -= 1;
+      self.aliveAnimats.splice(index, 1);
+      self.deadAnimats.push(animat);
     }
-  }
+  });
 };
 
 // /**
