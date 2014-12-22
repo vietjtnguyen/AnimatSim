@@ -2,6 +2,7 @@ var _ = require('./util');
 
 var BaseAnimat = require('./BaseAnimat');
 var Brain = require('./Brain');
+var generateDefaultBrain = require('./generateDefaultBrain');
 
 /**
  * @classdesc
@@ -38,7 +39,7 @@ Animat.base = BaseAnimat;
  */
 Animat.defaultSettings =
   {
-    brain: Brain.markIIb
+    brain: generateDefaultBrain
   };
 
 /**
