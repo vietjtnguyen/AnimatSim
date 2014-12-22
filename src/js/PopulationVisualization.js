@@ -15,7 +15,7 @@ function PopulationVisualization(d3SvgGroup, population)
   self.population = population;
 }
 
-Population.prototype.render = function(brush)
+PopulationVisualization.prototype.render = function(brush)
 {
   var self = this;
 
@@ -31,7 +31,7 @@ Population.prototype.render = function(brush)
   representations
     .attr('transform', function(animat)
     {
-      return geom.css2DEuclideanTransformMatrix (animat.x, animat.y, animat.dir);
+      return geom.css2DEuclideanTransformMatrix(animat.x, animat.y, animat.dir);
     })
     .style('fill', brush);
 };
