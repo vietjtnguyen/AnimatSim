@@ -94,6 +94,9 @@ module.exports = function()
 
   brainBuilder.connectComplete(['input', 'internalState']);
 
-  return brainBuilder.toBrain();
+  var brain = brainBuilder.toBrain();
+  brain.randomizeNeuronOutputs();
+
+  return brain;
 };
 
