@@ -72,8 +72,8 @@ module.exports = function()
   // Create hidden neurons.
   var i;
   var hiddenNeurons = [];
-  var numOfHiddenExcitatoryNeurons = 0;
-  var numOfHiddenInhibitoryNeurons = 0;
+  var numOfHiddenExcitatoryNeurons = 10;
+  var numOfHiddenInhibitoryNeurons = 10;
   for( i = 0; i < numOfHiddenExcitatoryNeurons; i += 1 )
   {
     hiddenNeurons.push(createStandardNeuron(1.0));
