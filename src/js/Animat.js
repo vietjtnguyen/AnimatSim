@@ -19,11 +19,11 @@ function Animat(settings)
 
   // Apply default settings and specified settings.
 	_.assign(self, Animat.defaultSettings, _.pick(settings, Animat.validSettingKeys));
-	var ignoredKeys = _.difference(_.keys(settings), Animat.validSettingKeys);
-	if ( ignoredKeys.length > 0 )
-	{
-	  console.log('WARN: The following settings for Animat construction were ignored: ' + ignoredKeys.join(', '));
-	}
+	// var ignoredKeys = _.difference(_.keys(settings), Animat.validSettingKeys);
+	// if ( ignoredKeys.length > 0 )
+	// {
+	//   console.log('WARN: The following settings for Animat construction were ignored: ' + ignoredKeys.join(', '));
+	// }
 
   // Create/assign brain.
   self.brain = _.isFunction(self.brain) ? self.brain() : self.brain;
