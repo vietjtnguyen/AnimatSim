@@ -9,7 +9,7 @@ env.terrain.normalizeValues();
 var pop = new AnimatSim.Population();
 pop.initialize(400, function() {
   return new Animat({
-    reset: function()
+    customReset: function()
     {
       var self = this;
       self.dir = _.random(-0.1, 0.1);
