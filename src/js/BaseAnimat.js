@@ -22,15 +22,19 @@ function BaseAnimat(settings)
 
   // Apply default settings and specified settings.
 	_.assign(self, BaseAnimat.defaultSettings, _.pick(settings, BaseAnimat.validSettingKeys));
+	var ignoredKeys = _.without(_.keys(settings), BaseAnimat.validSettingsKeys);
+	if ( ignoredKeys.length > 0 )
+	{
+	  console.log("WARN: The following settings for BaseAnimat construction were ignored: " + ignoredKeys.toString());
+	}
 
-  self.reset();
+  self.init();
 
   // Assign a unique ID to the animat.
   if ( !_.isFunction(self.generateId) )
   {
     throw Error('Animat ID generator must be a function that generates a unique ID.');
   }
-
   self.id = self.generateId();
 }
 
@@ -75,6 +79,7 @@ BaseAnimat.prototype.init = function()
 BaseAnimat.prototype.defaultReset = function(environment)
 {
   var self = this;
+  self.ticks = 0;
   self.x = 0.0;
   self.y = 0.0;
   self.dir = 0.0;
