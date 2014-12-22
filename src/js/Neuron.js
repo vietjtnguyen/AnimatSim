@@ -59,16 +59,16 @@ Neuron.prototype.processInput = function()
 {
   var self = this;
 
-  if ( self.connections.length == 0 )
+  if ( self.connections.length === 0 )
   {
     return;
   }
 
   self.totalInput = 0.0;
-  for( var i = 0; i < self.connections.length; i += 1 )
+  for ( var i = 0; i < self.connections.length; i += 1 )
   {
     var connection = self.connections[i];
-    self.totalInput += connection.neuron.output * normalizedSquash(connection.strength, 6.0);
+    self.totalInput += connection.neuron.output * connection.strength;
   }
 };
 
