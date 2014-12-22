@@ -5,15 +5,15 @@ var expect = chai.expect;
 
 var _ = require('lodash');
 
-describe('The Population module', function() {
-  var Population = require('../src/js/Population');
-  it('should contain the Population class', function() {
-    expect(Population.name).to.equal('Population');
-    var population = new Population();
-    expect(population).to.exist();
+describe('The PopulationVisualization module', function() {
+  var PopulationVisualization = require('../src/js/PopulationVisualization');
+  it('should contain the PopulationVisualization class', function() {
+    expect(PopulationVisualization.name).to.equal('PopulationVisualization');
+    var populationVisualization = new PopulationVisualization();
+    expect(populationVisualization).to.exist();
   });
 
-  describe('The Population class', function() {
+  describe('The PopulationVisualization class', function() {
     it('should start off empty');
     it('should add invidual animats through the add method');
     it('should populate appropriately using the populate method');
