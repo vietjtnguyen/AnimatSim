@@ -36,7 +36,6 @@ Animat.base = BaseAnimat;
  */
 Animat.defaultSettings =
   {
-    customReset: null,
     brain: Brain.markIIb
   };
 
@@ -73,10 +72,7 @@ Animat.prototype.reset = function()
 Animat.prototype.defaultReset = function(environment)
 {
   var self = this;
-  self.ticks = 0;
-  self.x = 0;
-  self.y = 0;
-  self.dir = 0;
+  Animat.base.defaultReset.call(self, environment);
   self.energy = 100.0;
   self.stomach = 1.0;
   self.vulnerability = 0.0;

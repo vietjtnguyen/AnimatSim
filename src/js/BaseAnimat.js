@@ -21,7 +21,7 @@ function BaseAnimat(settings, idFunc)
   var self = this;
 
   // Apply default settings and specified settings.
-	_.assign(self, Animat.defaultSettings, _.pick(settings, Animat.validSettingKeys));
+	_.assign(self, BaseAnimat.defaultSettings, _.pick(settings, BaseAnimat.validSettingKeys));
 
   self.reset();
 
@@ -35,9 +35,9 @@ function BaseAnimat(settings, idFunc)
 
 /**
  * @static
- * @memberof Animat
+ * @memberof BaseAnimat
  */
-Animat.defaultSettings =
+BaseAnimat.defaultSettings =
   {
     customReset: null
   };
@@ -45,18 +45,18 @@ Animat.defaultSettings =
 /**
  * Array of valid setting keys that will be [picked]{@link
  * https://lodash.com/docs#pick} from the settings object passed to {@link
- * Animat}'s constructor. This array is [pulled]{@link
- * https://lodash.com/docs#keys} from {@link Animat.defaultSettings}.
+ * BaseAnimat}'s constructor. This array is [pulled]{@link
+ * https://lodash.com/docs#keys} from {@link BaseAnimat.defaultSettings}.
  * @static
  */
-Animat.validSettingKeys = _.keys(Animat.defaultSettings);
+BaseAnimat.validSettingKeys = _.keys(BaseAnimat.defaultSettings);
 
 /**
  * Apply default reset and then allow custom reset to override changes. After
  * that, run pre-simulation initialization. This is not meant to be called
  * explicitly.
  */
-Animat.prototype.reset = function()
+BaseAnimat.prototype.reset = function()
 {
   var self = this;
   self.defaultReset();
@@ -70,15 +70,11 @@ Animat.prototype.reset = function()
 /**
  * The default reset function that is performed to reset animat attributes for
  * a new simulation. These values can be overriden by specifying a customReset
- * function in the settings object on Animat construction.
+ * function in the settings object on BaseAnimat construction.
  */
-Animat.prototype.defaultReset = function(environment)
+BaseAnimat.prototype.defaultReset = function(environment)
 {
   var self = this;
-  self.ticks = 0;
-  self.x = 0;
-  self.y = 0;
-  self.dir = 0;
   self.energy = 100.0;
   self.stomach = 1.0;
   self.vulnerability = 0.0;
@@ -88,17 +84,15 @@ Animat.prototype.defaultReset = function(environment)
  * Perform pre-simulation initialization. Right now this simply consists of
  * initializing the position history.
  */
-Animat.prototype.init = function()
+BaseAnimat.prototype.init = function()
 {
-  self.xHistory = self.x;
-  self.yHistory = self.y;
 };
 
 /**
  * Evalute a simulation step. Right now this is a monolithic function that does
  * sensing, decision, and action.
  */
-Animat.prototype.step = function(environment)
+BaseAnimat.prototype.step = function(environment)
 {
   var self = this;
 
@@ -294,6 +288,6 @@ Animat.prototype.step = function(environment)
   }
 };
 
-module.exports = Animat;
+module.exports = BaseAnimat;
 
 
