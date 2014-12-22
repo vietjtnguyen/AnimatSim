@@ -18,6 +18,11 @@ function Animat(settings)
 
   // Apply default settings and specified settings.
 	_.assign(self, Animat.defaultSettings, _.pick(settings, Animat.validSettingKeys));
+	var ignoredKeys = _.without(_.keys(settings), Animat.validSettingsKeys);
+	if ( ignoredKeys.length > 0 )
+	{
+	  console.log("WARN: The following settings for Animat construction were ignored: " + ignoredKeys.toString());
+	}
 
   // Create/assign brain.
   self.brain = _.isFunction(brain) ? brain() : brain;
