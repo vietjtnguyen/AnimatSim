@@ -53,6 +53,13 @@ Population.prototype.killAll = function() {
 
 /**
  */
+Population.prototype.reset = function()
+{
+  
+}
+
+/**
+ */
 Population.prototype.step = function(environment)
 {
   var i;
