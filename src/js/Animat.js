@@ -54,12 +54,7 @@ Animat.validSettingKeys = _.keys(Animat.defaultSettings);
 Animat.prototype.init = function()
 {
   var self = this;
-  Animat.base.init.call(self)
-  self.defaultReset();
-  if ( _.isFunction(self.customReset) )
-  {
-    self.customReset();
-  }
+  Animat.base.init.call(self);
   self.xHistory = self.x;
   self.yHistory = self.y;
 };
