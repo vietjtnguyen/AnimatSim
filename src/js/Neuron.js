@@ -2,19 +2,22 @@ var _ = require('./util');
 
 /**
  */
-function squash(x, a) {
+function squash(x, a)
+{
 	return (a + 2) * (x - 0.5) / (1 + a * Math.abs(x - 0.5));
 }
 
 /**
  */
-function normalizedSquash(x, a) {
-	return simpleSquash(x, a) * 0.5 + 0.5;
+function normalizedSquash(x, a)
+{
+	return squash(x, a) * 0.5 + 0.5;
 }
 
 /**
  */
-function sigmoid(x) {
+function sigmoid(x)
+{
 	return x / (1.0 + Math.abs(x));
 }
 
@@ -56,7 +59,7 @@ Neuron.prototype.processInput = function()
   for( var i = 0; i < this.connections.length; i += 1 )
   {
     var connection = this.connections[i];
-    this.totalInput += connection.neuron.output * simpleNormalizedSquash(connection.strength, 6.0);
+    this.totalInput += connection.neuron.output * normalizedSquash(connection.strength, 6.0);
   }
 };
 
