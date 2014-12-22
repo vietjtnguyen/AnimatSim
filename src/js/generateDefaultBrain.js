@@ -3,73 +3,105 @@ var _ = require('./util');
 var Brain = require('./Brain');
 var Neuron = require('./Neuron');
 
+function createStandardNeuron(sign)
+{
+  var threshold = _.random(0.2, 1.0);
+  var domainScale = _.random(0.1, 2.0);
+  var stochasticity = _.random(0.0, 1.0);
+  return new Neuron(sign, threshold, domainScale, stochasticity);
+}
+
 /**
  */
 module.exports = function()
 {
-  function createStandardNeuron(sign)
-  {
-    var threshold = _.random(0.2, 1.0);
-    var domainScale = _.random(0.1, 2.0);
-    var stochasticity = _.random(0.0, 1.0);
-    return new Neuron(sign, threshold, domainScale, stochasticity);
-  }
-    
-  var brain = new Brain();
-  brain.version = 'default_v1';
+  var brainBuilder = new BrainBuilder();
+  brainBuilder.version = 'default_v1';
+
+  var inputNames = [
+    'altitude',
+    'farAltitude',
+    'leftSlope',
+    'rightSlope',
+    'forwardSlope',
+    'backwardSlope',
+    'temperature',
+    'leftTemperatureGradient',
+    'rightTemperatureGradient',
+    'forwardTemperatureGradient',
+    'backwardTemperatureGradient',
+    'moisture',
+    'farWater',
+    'leftMoistureGradient',
+    'rightMoistureGradient',
+    'forwardMoistureGradient',
+    'backwardMoistureGradient',
+    'vegetation',
+    'farVegetation',
+    'leftVegetationGradient',
+    'rightVegetationGradient',
+    'forwardVegetationGradient',
+    'backwardVegetationGradient',
+    'animatDensity',
+    'farAnimatDensity',
+    'leftAnimatDensityGradient',
+    'rightAnimatDensityGradient',
+    'forwardAnimatDensityGradient',
+    'backwardAnimatDensityGradient'
+  ];
 
   // Create input neurons.
   var inputNeurons = [];
 
   // Sensors
-  inputNeurons.push(brain.altitude = createStandardNeuron(1.0));
-  inputNeurons.push(brain.farAltitude = createStandardNeuron(1.0));
-  inputNeurons.push(brain.leftSlope = createStandardNeuron(1.0));
-  inputNeurons.push(brain.rightSlope = createStandardNeuron(1.0));
-  inputNeurons.push(brain.forwardSlope = createStandardNeuron(1.0));
-  inputNeurons.push(brain.backwardSlope = createStandardNeuron(1.0));
-  inputNeurons.push(brain.temperature = createStandardNeuron(1.0));
-  inputNeurons.push(brain.leftTemperatureGradient = createStandardNeuron(1.0));
-  inputNeurons.push(brain.rightTemperatureGradient = createStandardNeuron(1.0));
-  inputNeurons.push(brain.forwardTemperatureGradient = createStandardNeuron(1.0));
-  inputNeurons.push(brain.backwardTemperatureGradient = createStandardNeuron(1.0));
-  inputNeurons.push(brain.moisture = createStandardNeuron(1.0));
-  inputNeurons.push(brain.farWater = createStandardNeuron(1.0));
-  inputNeurons.push(brain.leftMoistureGradient = createStandardNeuron(1.0));
-  inputNeurons.push(brain.rightMoistureGradient = createStandardNeuron(1.0));
-  inputNeurons.push(brain.forwardMoistureGradient = createStandardNeuron(1.0));
-  inputNeurons.push(brain.backwardMoistureGradient = createStandardNeuron(1.0));
-  inputNeurons.push(brain.vegetation = createStandardNeuron(1.0));
-  inputNeurons.push(brain.farVegetation = createStandardNeuron(1.0));
-  inputNeurons.push(brain.leftVegetationGradient = createStandardNeuron(1.0));
-  inputNeurons.push(brain.rightVegetationGradient = createStandardNeuron(1.0));
-  inputNeurons.push(brain.forwardVegetationGradient = createStandardNeuron(1.0));
-  inputNeurons.push(brain.backwardVegetationGradient = createStandardNeuron(1.0));
-  inputNeurons.push(brain.animatDensity = createStandardNeuron(1.0));
-  inputNeurons.push(brain.farAnimatDensity = createStandardNeuron(1.0));
-  inputNeurons.push(brain.leftAnimatDensityGradient = createStandardNeuron(1.0));
-  inputNeurons.push(brain.rightAnimatDensityGradient = createStandardNeuron(1.0));
-  inputNeurons.push(brain.forwardAnimatDensityGradient = createStandardNeuron(1.0));
-  inputNeurons.push(brain.backwardAnimatDensityGradient = createStandardNeuron(1.0));
+  inputNeurons.push(brainBuilder.altitude = createStandardNeuron(1.0));
+  inputNeurons.push(brainBuilder.farAltitude = createStandardNeuron(1.0));
+  inputNeurons.push(brainBuilder.leftSlope = createStandardNeuron(1.0));
+  inputNeurons.push(brainBuilder.rightSlope = createStandardNeuron(1.0));
+  inputNeurons.push(brainBuilder.forwardSlope = createStandardNeuron(1.0));
+  inputNeurons.push(brainBuilder.backwardSlope = createStandardNeuron(1.0));
+  inputNeurons.push(brainBuilder.temperature = createStandardNeuron(1.0));
+  inputNeurons.push(brainBuilder.leftTemperatureGradient = createStandardNeuron(1.0));
+  inputNeurons.push(brainBuilder.rightTemperatureGradient = createStandardNeuron(1.0));
+  inputNeurons.push(brainBuilder.forwardTemperatureGradient = createStandardNeuron(1.0));
+  inputNeurons.push(brainBuilder.backwardTemperatureGradient = createStandardNeuron(1.0));
+  inputNeurons.push(brainBuilder.moisture = createStandardNeuron(1.0));
+  inputNeurons.push(brainBuilder.farWater = createStandardNeuron(1.0));
+  inputNeurons.push(brainBuilder.leftMoistureGradient = createStandardNeuron(1.0));
+  inputNeurons.push(brainBuilder.rightMoistureGradient = createStandardNeuron(1.0));
+  inputNeurons.push(brainBuilder.forwardMoistureGradient = createStandardNeuron(1.0));
+  inputNeurons.push(brainBuilder.backwardMoistureGradient = createStandardNeuron(1.0));
+  inputNeurons.push(brainBuilder.vegetation = createStandardNeuron(1.0));
+  inputNeurons.push(brainBuilder.farVegetation = createStandardNeuron(1.0));
+  inputNeurons.push(brainBuilder.leftVegetationGradient = createStandardNeuron(1.0));
+  inputNeurons.push(brainBuilder.rightVegetationGradient = createStandardNeuron(1.0));
+  inputNeurons.push(brainBuilder.forwardVegetationGradient = createStandardNeuron(1.0));
+  inputNeurons.push(brainBuilder.backwardVegetationGradient = createStandardNeuron(1.0));
+  inputNeurons.push(brainBuilder.animatDensity = createStandardNeuron(1.0));
+  inputNeurons.push(brainBuilder.farAnimatDensity = createStandardNeuron(1.0));
+  inputNeurons.push(brainBuilder.leftAnimatDensityGradient = createStandardNeuron(1.0));
+  inputNeurons.push(brainBuilder.rightAnimatDensityGradient = createStandardNeuron(1.0));
+  inputNeurons.push(brainBuilder.forwardAnimatDensityGradient = createStandardNeuron(1.0));
+  inputNeurons.push(brainBuilder.backwardAnimatDensityGradient = createStandardNeuron(1.0));
 
   // Internal state
-  inputNeurons.push(brain.swimming = createStandardNeuron(1.0));
-  inputNeurons.push(brain.energyLow = createStandardNeuron(1.0));
-  inputNeurons.push(brain.energyHigh = createStandardNeuron(1.0));
-  inputNeurons.push(brain.energyLevel = createStandardNeuron(1.0));
-  inputNeurons.push(brain.energyChange = createStandardNeuron(1.0));
-  inputNeurons.push(brain.stomach = createStandardNeuron(1.0));
-  inputNeurons.push(brain.avoidance = createStandardNeuron(1.0));
+  inputNeurons.push(brainBuilder.swimming = createStandardNeuron(1.0));
+  inputNeurons.push(brainBuilder.energyLow = createStandardNeuron(1.0));
+  inputNeurons.push(brainBuilder.energyHigh = createStandardNeuron(1.0));
+  inputNeurons.push(brainBuilder.energyLevel = createStandardNeuron(1.0));
+  inputNeurons.push(brainBuilder.energyChange = createStandardNeuron(1.0));
+  inputNeurons.push(brainBuilder.stomach = createStandardNeuron(1.0));
+  inputNeurons.push(brainBuilder.avoidance = createStandardNeuron(1.0));
   
   // Create output neurons.
   var outputNeurons = [];
-  outputNeurons.push(brain.leanLeft = createStandardNeuron(1.0));
-  outputNeurons.push(brain.turnLeft = createStandardNeuron(1.0));
-  outputNeurons.push(brain.leanRight = createStandardNeuron(1.0));
-  outputNeurons.push(brain.turnRight = createStandardNeuron(1.0));
-  outputNeurons.push(brain.walkForward = createStandardNeuron(1.0));
-  outputNeurons.push(brain.runForward = createStandardNeuron(1.0));
-  outputNeurons.push(brain.eat = createStandardNeuron(1.0));
+  outputNeurons.push(brainBuilder.leanLeft = createStandardNeuron(1.0));
+  outputNeurons.push(brainBuilder.turnLeft = createStandardNeuron(1.0));
+  outputNeurons.push(brainBuilder.leanRight = createStandardNeuron(1.0));
+  outputNeurons.push(brainBuilder.turnRight = createStandardNeuron(1.0));
+  outputNeurons.push(brainBuilder.walkForward = createStandardNeuron(1.0));
+  outputNeurons.push(brainBuilder.runForward = createStandardNeuron(1.0));
+  outputNeurons.push(brainBuilder.eat = createStandardNeuron(1.0));
 
   // Create hidden neurons.
   var i;
@@ -85,29 +117,29 @@ module.exports = function()
     hiddenNeurons.push(createStandardNeuron(-1.0));
   }
   
-  // Add neurons to all list and brain.
+  // Add neurons to all list and brainBuilder.
   var allNeurons = [];
   for( i = 0; i < inputNeurons.length; i += 1 )
   {
     allNeurons.push(inputNeurons[i]);
-    brain.addInputNeuron(inputNeurons[i]);
+    brainBuilder.addInputNeuron(inputNeurons[i]);
   }
   for( i = 0; i < outputNeurons.length; i += 1 )
   {
     allNeurons.push(outputNeurons[i]);
-    brain.addNonInputNeuron(outputNeurons[i]);
+    brainBuilder.addNonInputNeuron(outputNeurons[i]);
   }
   for( i = 0; i < hiddenNeurons.length; i += 1 )
   {
     allNeurons.push(hiddenNeurons[i]);
-    brain.addNonInputNeuron(hiddenNeurons[i]);
+    brainBuilder.addNonInputNeuron(hiddenNeurons[i]);
   }
 
   // Connect neurons together. Input neurons do not connect with other
   // neurons. All other neurons connect with every other neuron.
-  for( i = 0; i < brain.nonInputNeurons.length; i += 1 )
+  for( i = 0; i < brainBuilder.nonInputNeurons.length; i += 1 )
   {
-    var nonInputNeuron = brain.nonInputNeurons[i];
+    var nonInputNeuron = brainBuilder.nonInputNeurons[i];
     nonInputNeuron.output = Math.random(); // random seed, not sure how important this is
     for( var j = 0; j < allNeurons.length; j += 1 )
     {
@@ -119,6 +151,6 @@ module.exports = function()
     }
   }
 
-  return brain;
+  return brainBuilder;
 };
 
