@@ -43,6 +43,12 @@ describe('The BaseAnimat module', function() {
       var uniqueBaseAnimatIds = _.uniq(baseAnimatIds);
       expect(baseAnimatIds.length).to.equal(uniqueBaseAnimatIds.length);
     });
+    it('should advance ticks on simulation step', function() {
+      var baseAnimat = new BaseAnimat();
+      var prevTicks = baseAnimat.ticks;
+      baseAnimat.step();
+      expect(baseAnimat.ticks).to.equal(prevTicks + 1);
+    });
   });
 });
 
