@@ -94,6 +94,46 @@ Environment.defaultSettings =
 Environment.validSettingKeys = _.keys(Environment.defaultSettings);
 
 /**
+ * Gets a value from a MeshGrid layer. The x and y coordinates here represent
+ * page coordinates where positive x goes to the right and positive y goes
+ * down.
+ */
+Environment.prototype.getValue = function(x, y, layer)
+{
+  var self = this;
+
+  // Convert page coordinates to tile coordinates.
+  x = x / self.tileSize;
+  y = y / self.tileSize;
+
+  return self[layer].getValue(x, y);
+};
+
+Environment.prototype.addValue = function(x, y, a, layer)
+{
+  var self = this;
+
+  // Convert page coordinates to tile coordinates.
+  x = x / self.tileSize;
+  y = y / self.tileSize;
+
+  return self[layer].addValue(x, y, a);
+};
+
+Environment.prototype.getGradient = function(x, y, layer)
+{
+  var self = this;
+
+  // Convert page coordinates to tile coordinates.
+  x = x / self.tileSize;
+  y = y / self.tileSize;
+  var step = 1.1;
+  
+  var ret = self[layer].getGradient(x, y, step);
+  return [ret[0] / self.tileSize, ret[1] / self.tileSize];
+};
+
+/**
  * This method performs a single simulation step. The simulation system uses no
  * tweening or time deltas and simply operates on constant time step ticks.
  * This method simply steps the simulation for moisture, temperature, and
