@@ -56,7 +56,7 @@ Population.prototype.killAll = function() {
 Population.prototype.reset = function()
 {
   
-}
+};
 
 /**
  */
