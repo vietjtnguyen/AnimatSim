@@ -27,6 +27,7 @@ Brain.prototype.step = function()
  */
 Brain.prototype.randomizeNeuronOutputs = function()
 {
+  var self = this;
   self.neurons.forEach(function(neuron) {
     neuron.output = _.random();
   });
