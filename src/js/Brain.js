@@ -8,9 +8,9 @@ var Neuron = require('./Neuron');
  */
 var Brain = function()
 {
-  // TODO: This distinction between input and non input neurons isn't actually used anywhere.
-  this.inputNeurons = [];
-  this.nonInputNeurons = [];
+  var self = this;
+  self.neurons = [];
+  self.nonInputNeurons = [];
 };
 
 /**
