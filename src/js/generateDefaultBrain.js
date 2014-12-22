@@ -6,9 +6,9 @@ var Neuron = require('./Neuron');
 
 function createStandardNeuron(sign)
 {
-  var threshold = _.random(0.2, 1.0);
-  var domainScale = _.random(0.1, 2.0);
-  var stochasticity = _.random(0.0, 1.0);
+  var threshold = _.random(0.2, 1.0, true);
+  var domainScale = _.random(0.1, 2.0, true);
+  var stochasticity = _.random(0.0, 1.0, true);
   return new Neuron(sign, threshold, domainScale, stochasticity);
 }
 
