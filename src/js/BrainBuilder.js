@@ -25,6 +25,23 @@ BrainBuilder.prototype.addNamedNeurons = function(inputNames, group, neuronFacto
   });
 };
 
+BrainBuilder.prototype.addUnnamedNeurons = function(numToAdd, group, neuronFactory)
+{
+  var i;
+  var neuron;
+  for ( i = 0; i < numToAdd; i += 1)
+  {
+    neuron = neuronFactory();
+    self.neurons.push(neuron);
+    if ( !self.groups.hasOwnProperty(group) )
+    {
+      self.groups[group] = [];
+    }
+    self.groups[name].push(neuron);
+    self.unnamedNeurons.push(neuron);
+  }
+};
+
 BrainBuilder.prototype.toBrain = function()
 {
 };
