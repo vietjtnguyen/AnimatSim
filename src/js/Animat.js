@@ -31,7 +31,7 @@ function Animat(settings, idFunc)
   // Create/assign brain.
   self.brain = _.isFunction(brain) ? brain() : brain;
 
-  // Assign an ID.
+  // Assign a unique ID to the animat.
   self.id = _.isFunction(idFunc) ? idFunc() : makeAnimatId();
 }
 
