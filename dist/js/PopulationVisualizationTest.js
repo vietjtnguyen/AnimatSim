@@ -1,3 +1,5 @@
+var _ = AnimatSim._;
+
 var env = new AnimatSim.Environment();
 env.terrain.iterateVertices(function(value, arr, x, y) {
   arr[x][y] = y;
@@ -6,7 +8,16 @@ env.terrain.normalizeValues();
 
 var pop = new AnimatSim.Population();
 pop.initialize(400, function() {
-  return new Animat(AnimatSim.Brain.markIIb);
+  return new Animat({
+    reset: function()
+    {
+      var self = this;
+      self.dir = _.random(-0.1, 0.1);
+      self.x = env.width * (0.5 + _.random(-0.02, 0.02));
+      self.y = env.width * (0.5 + _.random(-0.02, 0.02));
+    },
+    brain: AnimatSim.Brain.markIIb
+  });
 });
 
 var container = d3.select('body').append('div')
