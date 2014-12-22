@@ -73,4 +73,3 @@ describe('The Neuron module', function() {
   });
 });
 
-
