@@ -1,5 +1,7 @@
 var _ = require('./util');
 
+var Brain = require('./Brain');
+
 function BrainBuilder()
 {
   var self = this;
@@ -19,7 +21,7 @@ BrainBuilder.prototype.addNamedNeurons = function(inputNames, group, neuronFacto
     {
       self.groups[group] = [];
     }
-    self.groups[name].push(neuron);
+    self.groups[group].push(neuron);
     self.namedNeurons[name] = neuron;
   });
 };
@@ -37,7 +39,7 @@ BrainBuilder.prototype.addUnnamedNeurons = function(numToAdd, group, neuronFacto
     {
       self.groups[group] = [];
     }
-    self.groups[name].push(neuron);
+    self.groups[group].push(neuron);
     self.unnamedNeurons.push(neuron);
   }
 };
