@@ -49,6 +49,11 @@ describe('The BaseAnimat module', function() {
       baseAnimat.step();
       expect(baseAnimat.ticks).to.equal(prevTicks + 1);
     });
+    it('should complain if a non-callable ID generator is assigned', function() {
+      expect(function() {
+        var baseAnimat = new BaseAnimat({generateId: 1});
+      }).to.throw(Error);
+    });
   });
 });
 
