@@ -31,7 +31,7 @@ function relu(x) {
  * @classdesc
  * @class
  */
-var Neuron = function(sign, threshold, domainScale, stochasticity)
+function Neuron(sign, threshold, domainScale, stochasticity)
 {
   var self = this;
   self.sign = sign;
@@ -39,7 +39,7 @@ var Neuron = function(sign, threshold, domainScale, stochasticity)
   self.domainScale = domainScale;
   self.stochasticity = stochasticity;
   self.connections = [];
-};
+}
 
 /**
  */
