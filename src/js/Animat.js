@@ -86,7 +86,7 @@ Animat.prototype.defaultReset = function(environment)
  * Evalute a simulation step. Right now this is a monolithic function that does
  * sensing, decision, and action.
  */
-Animat.prototype.step = function(environment)
+Animat.prototype.step = function(environment, population)
 {
   var self = this;
   Animat.base.prototype.step.call(self, environment);
@@ -112,8 +112,8 @@ Animat.prototype.step = function(environment)
   self.farVegetation = environment.getValue(self.farX, self.farY, 'vegetation');
   self.vegetationGradient = geom.rotateVec(environment.getGradient(self.x, self.y, 'vegetation'), -self.dir);
 
-  self.animatDensity = _.clamp(environment.getValue(self.x, self.y, 'animatDensity') - 0.6, 0.0, populationSize);
-  self.farAnimatDensity = _.clamp(environment.getValue(self.farX, self.farY, 'animatDensity') - 0.6, 0.0, populationSize);
+  self.animatDensity = _.clamp(environment.getValue(self.x, self.y, 'animatDensity') - 0.6, 0.0, population.getTotalSize());
+  self.farAnimatDensity = _.clamp(environment.getValue(self.farX, self.farY, 'animatDensity') - 0.6, 0.0, population.getTotalSize());
   self.animatDensityGradient = geom.rotateVec(environment.getGradient(self.x, self.y, 'animatDensity'), -self.dir);
 
   // Update sensors in the brain. Zero direction in self coordinate system is

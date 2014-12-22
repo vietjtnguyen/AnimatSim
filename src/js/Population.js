@@ -42,6 +42,11 @@ Population.prototype.populate = function(numOfAnimats, animatFactory, replace)
   }
 };
 
+Population.prototype.getTotalSize = function()
+{
+  return self.aliveAnimats.length + self.deadAnimats.length;
+};
+
 /**
  */
 Population.prototype.killAll = function()
