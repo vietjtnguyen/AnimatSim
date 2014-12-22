@@ -120,7 +120,7 @@ Neuron.prototype.fromGene = function(gene)
   self.threshold = gene[0];
   self.domainScale = gene[1];
   self.stochasticity = gene[2];
-  for( var i = 0; i < self.connections.length; i += 1 )
+  for ( var i = 0; i < self.connections.length; i += 1 )
   {
     self.connections[i].strength = gene[3 + i];
   }
@@ -133,19 +133,19 @@ Neuron.mixGenes = function(geneA, geneB, crossOverRate, mutationRate)
   var gene = [];
   var operator = _.random(0, 2);
   var crossOverChance = 0.0;
-  for( var i = 0; i < geneA.length; i += 1 )
+  for ( var i = 0; i < geneA.length; i += 1 )
   {
     var bitA = geneA[i],
       bitB = geneB[i],
       bit = null;
 
     crossOverChance += crossOverRate;
-    if( Math.random() < crossOverChance )
+    if ( Math.random() < crossOverChance )
     {
       operator = _.random(0, 2);
       crossOverChance = 0.0;
     }
-    switch( operator )
+    switch ( operator )
     {
     case 0: // use A
       bit = bitA;
@@ -161,7 +161,7 @@ Neuron.mixGenes = function(geneA, geneB, crossOverRate, mutationRate)
       break;
     }
 
-    if( Math.random() < mutationRate )
+    if ( Math.random() < mutationRate )
     {
       bit = bit * _.random(0.5, 1.5);
     }
@@ -180,7 +180,7 @@ Neuron.mutateGene = function(gene)
   mutatedGene[0] = _.random(0.2, 1.0);
   mutatedGene[1] = _.random(0.1, 2.0);
   mutatedGene[2] = _.random(0.0, 1.0);
-  for( var i = 3; i < gene.length; i += 1 )
+  for ( var i = 3; i < gene.length; i += 1 )
   {
     mutatedGene[i] = _.random(0.0, 1.0);
   }
