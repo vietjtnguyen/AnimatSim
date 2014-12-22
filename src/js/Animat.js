@@ -82,12 +82,20 @@ Animat.prototype.defaultReset = function(environment)
   self.vulnerability = 0.0;
 };
 
+/**
+ * Perform pre-simulation initialization. Right now this simply consists of
+ * initializing the position history.
+ */
 Animat.prototype.init = function()
 {
   self.xHistory = self.x;
   self.yHistory = self.y;
 };
 
+/**
+ * Evalute a simulation step. Right now this is a monolithic function that does
+ * sensing, decision, and action.
+ */
 Animat.prototype.step = function(environment)
 {
   var self = this;
