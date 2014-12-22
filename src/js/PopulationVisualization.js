@@ -1,4 +1,4 @@
-var geom = require('.geom');
+var geom = require('./geom');
 
 function PopulationVisualization(d3SvgGroup, population)
 {
