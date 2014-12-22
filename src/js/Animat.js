@@ -9,12 +9,12 @@ var Brain = require('./Brain');
  * @arg [{function}] idFunc
  * @class
  */
-function Animat(settings, idFunc)
+function Animat(settings)
 {
   var self = this;
   
   // Call base constructor.
-  Animat.base.call(self, settings, idFunc);
+  Animat.base.call(self, settings);
 
   // Apply default settings and specified settings.
 	_.assign(self, Animat.defaultSettings, _.pick(settings, Animat.validSettingKeys));

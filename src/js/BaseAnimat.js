@@ -16,7 +16,7 @@ makeAnimatId.globalAnimatCounter = -1;
  * @arg [{function}] idFunc
  * @class
  */
-function BaseAnimat(settings, idFunc)
+function BaseAnimat(settings)
 {
   var self = this;
 
@@ -26,7 +26,12 @@ function BaseAnimat(settings, idFunc)
   self.reset();
 
   // Assign a unique ID to the animat.
-  self.id = _.isFunction(idFunc) ? idFunc() : makeAnimatId();
+  if ( !_.isFunction(self.generateId) )
+  {
+    throw Error('Animat ID generator must be a function that generates a unique ID.');
+  }
+
+  self.id = self.generateId();
 }
 
 
@@ -36,7 +41,8 @@ function BaseAnimat(settings, idFunc)
  */
 BaseAnimat.defaultSettings =
   {
-    customReset: null
+    customReset: null,
+    generateId: makeAnimatId
   };
 
 /**
@@ -49,11 +55,9 @@ BaseAnimat.defaultSettings =
 BaseAnimat.validSettingKeys = _.keys(BaseAnimat.defaultSettings);
 
 /**
- * Apply default reset and then allow custom reset to override changes. After
- * that, run pre-simulation initialization. This is not meant to be called
- * explicitly.
+ * Apply default reset and then allow custom reset to override changes.
  */
-BaseAnimat.prototype.reset = function()
+BaseAnimat.prototype.init = function()
 {
   var self = this;
   self.defaultReset();
@@ -61,7 +65,6 @@ BaseAnimat.prototype.reset = function()
   {
     self.customReset();
   }
-  self.init();
 };
 
 /**
@@ -75,14 +78,6 @@ BaseAnimat.prototype.defaultReset = function(environment)
   self.x = 0.0;
   self.y = 0.0;
   self.dir = 0.0;
-};
-
-/**
- * Perform pre-simulation initialization. Right now this simply consists of
- * initializing the position history.
- */
-BaseAnimat.prototype.init = function()
-{
 };
 
 /**
