@@ -39,7 +39,10 @@ Animat.base = BaseAnimat;
  */
 Animat.defaultSettings =
   {
-    brain: generateDefaultBrain
+    brain: generateDefaultBrain,
+    energy: 100.0,
+    stomach: 1.0,
+    vulnerability: 0.0
   };
 
 /**
