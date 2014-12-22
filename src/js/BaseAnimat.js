@@ -45,6 +45,10 @@ function BaseAnimat(settings)
  */
 BaseAnimat.defaultSettings =
   {
+    ticks: 0,
+    x: 0.0,
+    y: 0.0,
+    dir: 0.0,
     customReset: null,
     generateId: makeAnimatId
   };
