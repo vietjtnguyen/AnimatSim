@@ -45,7 +45,7 @@ Brain.prototype.fullyConnect = function()
       }
     }
   }
-}
+};
 
 /**
  */
