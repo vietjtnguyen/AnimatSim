@@ -69,9 +69,16 @@ Neuron.prototype.processInput = function()
   }
 
   self.totalInput = 0.0;
-  self.connections.forEach(function(connection) {
-    self.totalInput += connection.neuron.output * connection.strength;
-  });
+  var i;
+  for ( i = 0; i < self.connections.length; i += 1 )
+  {
+    self.totalInput += self.connections[i].neuron.output * self.connections[i].strength;
+  }
+  // NOTE: The following code is *significantly* slower than the vanilla for
+  // loop above (see http://jsperf.com/fast-array-foreach).
+  // self.connections.forEach(function(connection) {
+  //   self.totalInput += connection.neuron.output * connection.strength;
+  // });
 };
 
 

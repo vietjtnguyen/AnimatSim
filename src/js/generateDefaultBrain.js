@@ -86,12 +86,12 @@ module.exports = function()
   // Create excitatory neurons.
   group = 'excitatory';
   neuronFactory = function() { return createStandardNeuron(1.0); };
-  brainBuilder.addUnnamedNeurons(10, group, neuronFactory);
+  brainBuilder.addUnnamedNeurons(0, group, neuronFactory);
 
   // Create inhibitory neurons.
   group = 'inhibitory';
   neuronFactory = function() { return createStandardNeuron(-1.0); };
-  brainBuilder.addUnnamedNeurons(10, group, neuronFactory);
+  brainBuilder.addUnnamedNeurons(0, group, neuronFactory);
 
   brainBuilder.connectComplete(['input', 'internalState']);
 
