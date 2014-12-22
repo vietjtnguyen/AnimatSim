@@ -23,10 +23,8 @@ function Animat(settings, idFunc)
 {
   var self = this;
 
-  /**
-   * @memberof Animat
-   */
-  self.settings = settings;
+  // Apply default settings and specified settings.
+	_.assign(self, Animat.defaultSettings, _.pick(settings, Animat.validSettingKeys));
 
   self.reset();
 
@@ -44,10 +42,7 @@ function Animat(settings, idFunc)
  */
 Animat.defaultSettings =
   {
-    x: 0.0,
-    y: 0.0,
-    dir: 0.0,
-    ticks: 0,
+    customReset: null,
     brain: Brain.markIIb
   };
 
@@ -61,36 +56,37 @@ Animat.defaultSettings =
 Animat.validSettingKeys = _.keys(Animat.defaultSettings);
 
 /**
- * Reapplies the settings object that was set on construction.
+ * Apply default reset and then allow custom reset to override changes.
  */
 Animat.prototype.reset = function()
 {
   var self = this;
-
-  // Apply default settings and specified settings.
-	_.assign(self, Animat.defaultSettings, _.objectResult(_.pick(settings, Animat.validSettingKeys)));
+  self.defaultReset();
+  if ( _.isFunction(self.customReset) )
+  {
+    self.customReset();
+  }
 };
 
-
-
-Animat.prototype.oldReset = function(environment)
+Animat.prototype.defaultReset = function(environment)
 {
   var self = this;
+
   self.ticks = 0;
 
-  //self.dir = _.random(0.0, Math.PI * 2.0);
-  //self.x = _.random(0.0, environment.size);
-  //self.y = _.random(0.0, environment.size);
-  self.dir = _.random(-0.1, 0.1);
-  self.x = environment.size * (0.5 + _.random(-0.02, 0.02));
-  self.y = environment.size * (0.5 + _.random(-0.02, 0.02));
-
-  self.xHistory = self.x;
-  self.yHistory = self.y;
+  self.x = 0;
+  self.y = 0;
+  self.dir = 0;
 
   self.energy = 100.0;
   self.stomach = 1.0;
   self.vulnerability = 0.0;
+};
+
+Animat.prototype.init = function()
+{
+  self.xHistory = self.x;
+  self.yHistory = self.y;
 };
 
 Animat.prototype.step = function(environment)
