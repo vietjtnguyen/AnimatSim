@@ -9,6 +9,10 @@ namespace.queryString = require('query-string');
 // I tried wrapping this is a for loop so that only an array of module names
 // would have to be specified but that appears to break Browserify.
 namespace.Animat = require('./Animat');
+namespace.Brain = require('./Brain');
+namespace.BrainBuilder = require('./BrainBuilder');
+namespace.Neuron = require('./Neuron');
+namespace.generateDefaultBrain = require('./generateDefaultBrain ');
 namespace.Environment = require('./Environment');
 namespace.EnvironmentVisualization = require('./EnvironmentVisualization');
 namespace.tileBrushes = require('./tileBrushes');
