@@ -74,7 +74,7 @@ BrainBuilder.prototype.toBrain = function()
   var self = this;
   var brain = new Brain();
   brain.neurons = self.neurons;
-  _.forEach(self.namedNeurons, function(name, neuron) {
+  _.forEach(self.namedNeurons, function(neuron, name) {
     brain[name] = neuron;
   });
   return brain;
