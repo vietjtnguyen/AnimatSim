@@ -55,6 +55,7 @@ describe('The Neuron module', function() {
       neuronC.setInput(1.0);
       neuronA.processInput();
       neuronA.fire();
+      console.log(neuronA.totalInput);
       expect(neuronA.output).to.be.greaterThan(0.0);
       neuronB.setInput(1.0);
       neuronC.setInput(0.0);
