@@ -45,7 +45,7 @@ BrainBuilder.prototype.addUnnamedNeurons = function(numToAdd, group, neuronFacto
 BrainBuilder.prototype.connectComplete = function(groupsToNotConnect)
 {
   groupsToNotConnect = groupsToNotConnect || [];
-  var groupNames = _.without(_.keys(self.groups), groupsToNotConnect);
+  var groupNames = _.difference(_.keys(self.groups), groupsToNotConnect);
   groupNames.forEach(function(groupName) {
     self.groups[groupName].forEach(function(neuron) {
       self.neurons.forEach(function(inNeuron) {
