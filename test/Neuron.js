@@ -17,14 +17,14 @@ describe('The Neuron module', function() {
     it('should fire and produce output when total input exceeds threshold', function() {
       var threshold = 1.0;
       var neuron = new Neuron(1.0, threshold, 1.0, 0.0);
-      neuron.setInput(1.5);
+      neuron.setInput(1000.0);
       neuron.fire();
       expect(neuron.output).to.greaterThan(0.0);
     });
     it('should not fire and produce zero output when total input does not exceed threshold', function() {
       var threshold = 1.0;
       var neuron = new Neuron(1.0, threshold, 1.0, 0.0);
-      neuron.setInput(0.5);
+      neuron.setInput(0.0);
       neuron.fire();
       expect(neuron.output).to.equal(0.0);
     });
