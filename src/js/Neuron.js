@@ -54,6 +54,10 @@ Neuron.prototype.connect = function(neuron, strength)
 
 
 /**
+ * Resets the total input signal to the neuron and sums it up across all
+ * connected neurons. If there are no connected neurons (presumably because
+ * this is an input neuron which has its input set using the `setInput` method)
+ * then the total input is left alone (i.e. not reset).
  */
 Neuron.prototype.processInput = function()
 {
