@@ -2,25 +2,25 @@ var _ = require('./util');
 
 /**
  */
-function simpleSquash(x, a) {
+function squash(x, a) {
 	return (a + 2) * (x - 0.5) / (1 + a * Math.abs(x - 0.5));
 }
 
 /**
  */
-function simpleNormalizedSquash(x, a) {
+function normalizedSquash(x, a) {
 	return simpleSquash(x, a) * 0.5 + 0.5;
 }
 
 /**
  */
-function simpleSigmoid(x) {
+function sigmoid(x) {
 	return x / (1.0 + Math.abs(x));
 }
 
 /**
  */
-function simpleRelu(x) {
+function relu(x) {
   return Math.max(x, 0);
 }
 
@@ -74,7 +74,7 @@ Neuron.prototype.setInput = function(value)
  */
 Neuron.prototype.fire = function()
 {
-  if( simpleSigmoid(this.totalInput * this.domainScale) >= this.threshold )
+  if( sigmoid(this.totalInput * this.domainScale) >= this.threshold )
   {
     this.output = this.sign * ((1.0 - this.stochasticity) + Math.random() * this.stochasticity);
   }
