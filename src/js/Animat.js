@@ -255,8 +255,9 @@ Animat.prototype.step = function(environment, population)
   self.y += Math.sin(self.dir) * self.moveAmount;
 
   // Keep the animat inside the environment.
-  self.x = Math.min(Math.max(self.x, 0), environment.size);
-  self.y = Math.min(Math.max(self.y, 0), environment.size);
+  // TODO: Check if I correctly associated width and height with x and y.
+  self.x = Math.min(Math.max(self.x, 0), environment.width);
+  self.y = Math.min(Math.max(self.y, 0), environment.height);
 
   // Maintain history
   var historyPreference = 0.9;
