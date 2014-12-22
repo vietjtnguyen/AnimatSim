@@ -10,40 +10,42 @@ var Animat = require('./Animat');
 function Population()
 {
   var self = this;
-  this.aliveAnimats = [];
-  this.deadAnimats = [];
+  self.aliveAnimats = [];
+  self.deadAnimats = [];
 }
 
 /**
  */
 Population.prototype.add = function(animat)
 {
-  this.aliveAnimats.push(animat);
+  var self = this;
+  self.aliveAnimats.push(animat);
 };
 
 /**
  */
 Population.prototype.populate = function(numOfAnimats, animatFactory, replace)
 {
+  var self = this;
   if ( !_.isFunction(animatFactory) )
   {
     throw Error('Population.populate() requires a callable function for the animatFactory argument.');
   }
   // animatFactory = _.isFunction(animatFactory) ? animatFactory : function() { return new Animat(); };
-  replace = _.isUndefined(replace) ? false : replace;
   if ( replace )
   {
-    this.aliveAnimats = _.times(numOfAnimats, animatFactory);
+    self.aliveAnimats = _.times(numOfAnimats, animatFactory);
   }
   else
   {
-    this.aliveAnimats = this.aliveAnimats.concat(_.times(numOfAnimats, animatFactory));
+    self.aliveAnimats = self.aliveAnimats.concat(_.times(numOfAnimats, animatFactory));
   }
 };
 
 /**
  */
-Population.prototype.killAll = function() {
+Population.prototype.killAll = function()
+{
   var self = this;
   while ( self.aliveAnimats.length > 0 )
   {
