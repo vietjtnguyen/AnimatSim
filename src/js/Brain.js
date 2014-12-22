@@ -23,6 +23,15 @@ Brain.prototype.step = function()
   });
 };
 
+/**
+ */
+Brain.prototype.randomizeNeuronOutputs = function()
+{
+  self.neurons.forEach(function(neuron) {
+    neuron.output = _.random();
+  });
+};
+
 // // Right now I cheat because I have a set topology so this genome-making
 // // process ensures the neurons represent the same thing in the same order
 // // simply via consistent construction.
