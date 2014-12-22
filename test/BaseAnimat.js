@@ -37,15 +37,11 @@ describe('The BaseAnimat module', function() {
       expect(baseAnimat.dir).to.equal(settings.dir);
       expect(baseAnimat.customReset).to.equal(settings.customReset);
     });
-    it('should accept calculate width and height correctly', function() {
-      var settings = {
-        rows: 11,
-        cols: 11,
-        tileSize: 33.0
-      };
-      var baseAnimat = new BaseAnimat(settings);
-      expect(baseAnimat.width).to.equal(settings.rows * settings.tileSize);
-      expect(baseAnimat.height).to.equal(settings.cols * settings.tileSize);
+    it('should assign each animat a unique ID', function() {
+      var baseAnimats = _.times(100, function() { return new BaseAnimat(); });
+      var baseAnimatIds = _.pluck(baseAnimats, 'id');
+      var uniqueBaseAnimatIds = _.uniq(baseAnimatIds);
+      expect(baseAnimatIds.length).to.equal(uniqueBaseAnimatIds.length);
     });
   });
 });
