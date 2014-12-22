@@ -57,7 +57,14 @@ Population.prototype.killAll = function()
  */
 Population.prototype.reset = function()
 {
-  
+  var self = this;
+  while ( self.deadAnimats.length > 0 )
+  {
+    self.aliveAnimats.push(self.deadAnimats.pop());
+  }
+  self.aliveAnimats.forEach(function(animat) {
+    animat.reset();
+  });
 };
 
 /**
