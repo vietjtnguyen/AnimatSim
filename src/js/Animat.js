@@ -5,8 +5,7 @@ var Brain = require('./Brain');
 
 /**
  * @classdesc
- * @arg {Object} environment
- * @arg {Object} settings Specifies settings to override in animat (see {@link Animat.defaultSettings}). Note that these settings are reapplied (also re-evaluated if the specific values are functions) when the {@link Animat#reset} function is called.
+ * @arg {Object} settings
  * @arg [{function}] idFunc
  * @class
  */
@@ -15,7 +14,7 @@ function Animat(settings, idFunc)
   var self = this;
   
   // Call base constructor.
-  Animat.base.call(self, settings);
+  Animat.base.call(self, settings, idFunc);
 
   // Apply default settings and specified settings.
 	_.assign(self, Animat.defaultSettings, _.pick(settings, Animat.validSettingKeys));
