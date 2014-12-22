@@ -89,7 +89,7 @@ Neuron.prototype.fire = function()
   var self = this;
   if( sigmoid(self.totalInput * self.domainScale) >= self.threshold )
   {
-    self.output = self.sign * ((1.0 - self.stochasticity) + Math.random() * self.stochasticity);
+    self.output = self.sign * ((1.0 - self.stochasticity) + _.random() * self.stochasticity);
   }
   else
   {
