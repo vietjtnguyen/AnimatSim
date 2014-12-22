@@ -51,23 +51,13 @@ Brain.prototype.fullyConnect = function()
  */
 Brain.prototype.step = function()
 {
-  var i;
-  // Only non-input neurons process their inputs because input neurons have
-  // their input set by the animat's sensors
-  for( i = 0; i < this.nonInputNeurons.length; i += 1 )
-  {
-    this.nonInputNeurons[i].processInput();
-  }
-
-  // All neurons fire.
-  for( i = 0; i < this.inputNeurons.length; i += 1 )
-  {
-    this.inputNeurons[i].fire();
-  }
-  for( i = 0; i < this.nonInputNeurons.length; i += 1 )
-  {
-    this.nonInputNeurons[i].fire();
-  }
+  var self = this;
+  self.neurons.forEach(function(neuron) {
+    neuron.processInput();
+  });
+  self.neurons.forEach(function(neuron) {
+    neuron.fire();
+  });
 };
 
 // Right now I cheat because I have a set topology so this genome-making
