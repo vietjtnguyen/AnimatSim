@@ -52,6 +52,7 @@ Animat.prototype.init = function()
 {
   var self = this;
   Animat.base.init.call(self);
+
   self.xHistory = self.x;
   self.yHistory = self.y;
 };
@@ -65,6 +66,7 @@ Animat.prototype.defaultReset = function(environment)
 {
   var self = this;
   Animat.base.defaultReset.call(self, environment);
+
   self.energy = 100.0;
   self.stomach = 1.0;
   self.vulnerability = 0.0;
