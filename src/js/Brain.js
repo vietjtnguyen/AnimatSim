@@ -27,6 +27,23 @@ Brain.prototype.addNonInputNeuron = function(neuron)
   return this.nonInputNeurons.push(neuron);
 };
 
+Brain.prototype.fullyConnect = function()
+{
+  for( i = 0; i < brain.nonInputNeurons.length; i += 1 )
+  {
+    var nonInputNeuron = brain.nonInputNeurons[i];
+    nonInputNeuron.output = Math.random(); // random seed, not sure how important this is
+    for( var j = 0; j < allNeurons.length; j += 1 )
+    {
+      var otherNeuron = allNeurons[j];
+      if( nonInputNeuron != otherNeuron )
+      {
+        nonInputNeuron.connect(otherNeuron, Math.random() * 1.0);
+      }
+    }
+  }
+}
+
 /**
  */
 Brain.prototype.step = function()
