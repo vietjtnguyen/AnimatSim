@@ -19,6 +19,7 @@ pop.populate(400, function() {
     brain: AnimatSim.generateDefaultBrain
   });
 });
+pop.reset();
 
 var container = d3.select('body').append('div')
 	.attr('style', 'width: ' + env.width + 'px ; height: ' + env.height + 'px ; margin: 0px; float: left;');
