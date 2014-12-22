@@ -31,7 +31,7 @@ Population.prototype.render = function(brush)
   representations
     .attr('transform', function(animat)
     {
-      return geom.cssTransformMatrix(animat.x, animat.y, animat.dir);
+      return geom.css2DEuclideanTransformMatrix (animat.x, animat.y, animat.dir);
     })
     .style('fill', brush);
 };

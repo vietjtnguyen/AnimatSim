@@ -41,7 +41,7 @@ exports.rotateVec = function(xy, ang)
   ];
 };
 
-exports.cssTransformMatrix = function(x, y, angRad)
+exports.css2DEuclideanTransformMatrix = function(x, y, angRad)
 {
     return 'matrix(' +
       (+Math.cos(angRad)) + ' ' +
