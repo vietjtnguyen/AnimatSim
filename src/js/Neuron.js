@@ -87,6 +87,7 @@ Neuron.prototype.setInput = function(value)
 
 
 /**
+ * Implements an all-or-nothing firing model.
  */
 Neuron.prototype.fire = function()
 {
