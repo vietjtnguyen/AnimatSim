@@ -57,7 +57,8 @@ Animat.validSettingKeys = _.keys(Animat.defaultSettings);
 
 /**
  * Apply default reset and then allow custom reset to override changes. After
- * that, run pre-simulation initialization.
+ * that, run pre-simulation initialization. This is not meant to be called
+ * explicitly.
  */
 Animat.prototype.reset = function()
 {
@@ -70,6 +71,11 @@ Animat.prototype.reset = function()
   self.init();
 };
 
+/**
+ * The default reset function that is performed to reset animat attributes for
+ * a new simulation. These values can be overriden by specifying a customReset
+ * function in the settings object on Animat construction.
+ */
 Animat.prototype.defaultReset = function(environment)
 {
   var self = this;
