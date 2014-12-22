@@ -1,7 +1,5 @@
 var _ = require('./util');
 
-var Neuron = require('./Neuron');
-
 function BrainBuilder()
 {
   var self = this;
@@ -77,6 +75,7 @@ BrainBuilder.prototype.toBrain = function()
   _.forEach(self.namedNeurons, function(name, neuron) {
     brain[name] = neuron;
   });
+  return brain;
 };
 
 module.exports = BrainBuilder;
