@@ -9,8 +9,10 @@ module.exports = function()
 {
   function createStandardNeuron(sign)
   {
-    //sign, threshold, domainScale, stochasticity
-    return new Neuron(sign, _.random(0.2, 1.0), _.random(0.1, 2.0), _.random(0.0, 1.0));
+    var threshold = _.random(0.2, 1.0);
+    var domainScale = _.random(0.1, 2.0);
+    var stochasticity = _.random(0.0, 1.0);
+    return new Neuron(sign, threshold, domainScale, stochasticity);
   }
     
   var brain = new Brain();
