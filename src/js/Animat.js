@@ -3,6 +3,7 @@ var _ = require('./util');
 var BaseAnimat = require('./BaseAnimat');
 var Brain = require('./Brain');
 var generateDefaultBrain = require('./generateDefaultBrain');
+var geom = require('./geom');
 
 /**
  * @classdesc
@@ -99,21 +100,21 @@ Animat.prototype.step = function(environment)
   self.farAltitude = environment.getValue(self.farX, self.farY, 'terrain');
   self.swimming = self.altitude < environment.waterLevel;
   self.farWater = self.farAltitude < environment.waterLevel;
-  self.slope = util.rotateVec(environment.getGradient(self.x, self.y, 'terrain'), -self.dir);
+  self.slope = geom.rotateVec(environment.getGradient(self.x, self.y, 'terrain'), -self.dir);
 
   self.temperature = environment.getValue(self.x, self.y, 'temperature');
-  self.temperatureGradient = util.rotateVec(environment.getGradient(self.x, self.y, 'temperature'), -self.dir);
+  self.temperatureGradient = geom.rotateVec(environment.getGradient(self.x, self.y, 'temperature'), -self.dir);
 
   self.moisture = environment.getValue(self.x, self.y, 'moisture');
-  self.moistureGradient = util.rotateVec(environment.getGradient(self.x, self.y, 'moisture'), -self.dir);
+  self.moistureGradient = geom.rotateVec(environment.getGradient(self.x, self.y, 'moisture'), -self.dir);
 
   self.vegetation = environment.getValue(self.x, self.y, 'vegetation');
   self.farVegetation = environment.getValue(self.farX, self.farY, 'vegetation');
-  self.vegetationGradient = util.rotateVec(environment.getGradient(self.x, self.y, 'vegetation'), -self.dir);
+  self.vegetationGradient = geom.rotateVec(environment.getGradient(self.x, self.y, 'vegetation'), -self.dir);
 
   self.animatDensity = _.clamp(environment.getValue(self.x, self.y, 'animatDensity') - 0.6, 0.0, populationSize);
   self.farAnimatDensity = _.clamp(environment.getValue(self.farX, self.farY, 'animatDensity') - 0.6, 0.0, populationSize);
-  self.animatDensityGradient = util.rotateVec(environment.getGradient(self.x, self.y, 'animatDensity'), -self.dir);
+  self.animatDensityGradient = geom.rotateVec(environment.getGradient(self.x, self.y, 'animatDensity'), -self.dir);
 
   // Update sensors in the brain. Zero direction in self coordinate system is
   // at positive X. This means left is -Y, right is +Y, forward is +X, and
