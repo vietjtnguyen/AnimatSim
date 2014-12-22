@@ -6,7 +6,7 @@ env.terrain.normalizeValues();
 
 var pop = new AnimatSim.Population();
 pop.initialize(400, function() {
-  return new Animat();
+  return new Animat(AnimatSim.Brain.markIIb);
 });
 
 var container = d3.select('body').append('div')
