@@ -49,7 +49,10 @@ BrainBuilder.prototype.connectComplete = function(groupsToNotConnect)
   groupNames.forEach(function(groupName) {
     self.groups[groupName].forEach(function(neuron) {
       self.neurons.forEach(function(inNeuron) {
-        neuron.connect(inNeuron, _.random());
+        if ( neuron !== inNeuron )
+        {
+          neuron.connect(inNeuron, _.random());
+        }
       });
     });
   });
