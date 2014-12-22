@@ -1,6 +1,7 @@
 var _ = require('./util');
 
 var Brain = require('./Brain');
+var BrainBuilder = require('./BrainBuilder');
 var Neuron = require('./Neuron');
 
 function createStandardNeuron(sign)
